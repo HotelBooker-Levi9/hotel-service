@@ -1,5 +1,6 @@
 package com.example.hotelservice.controller;
 
+import com.example.hotelservice.dto.ReservationDTO;
 import com.example.hotelservice.service.CityService;
 import com.example.hotelservice.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class HotelController {
         @GetMapping("/getCapacityForHotelId/{id}")
         public Integer getCapacityForHotelId(@PathVariable Long id) {
                 return hotelService.getCapacityForHotelId(id).getCapacity();
+        }
+
+        @PostMapping("/calculatePriceForReservation")
+        public Integer calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
+                return hotelService.calculatePriceForReservation(resDto);
         }
 }

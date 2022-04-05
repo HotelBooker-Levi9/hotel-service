@@ -19,7 +19,7 @@ public class HotelServiceImpl implements HotelService {
     private HotelRepository hotelRepository;
 
     @Override
-    public ResponseEntity<?> getCapacityForHotelId(Long id) throws NoSuchElementException {
+    public ResponseEntity<?> getCapacityForHotelId(Long id) {
         try {
             return new ResponseEntity<>(hotelRepository.findById(id).get().getCapacity(), HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -29,7 +29,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public ResponseEntity<?> calculatePriceForReservation(ReservationDTO resDto) throws NoSuchElementException {
+    public ResponseEntity<?> calculatePriceForReservation(ReservationDTO resDto) {
         Long diffInMillies = Math.abs(resDto.getCheckOutDate().getTime() - resDto.getCheckInDate().getTime());
         Long numberOfDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 

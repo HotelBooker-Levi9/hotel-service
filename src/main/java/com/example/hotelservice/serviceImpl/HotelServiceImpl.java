@@ -25,7 +25,6 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Integer calculatePriceForReservation(ReservationDTO resDto) {
-//        Long numberOfDays = ChronoUnit.DAYS.between((Temporal) resDto.getCheckInDate(), (Temporal) resDto.getCheckOutDate());
         Long diffInMillies = Math.abs(resDto.getCheckOutDate().getTime() - resDto.getCheckInDate().getTime());
         Long numberOfDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 

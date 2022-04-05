@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -24,5 +27,8 @@ public class Hotel {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private City city;
+    
+    
 }

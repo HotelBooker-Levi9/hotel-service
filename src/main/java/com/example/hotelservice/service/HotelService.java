@@ -1,10 +1,10 @@
 package com.example.hotelservice.service;
 
 import com.example.hotelservice.dto.ReservationDTO;
-import com.example.hotelservice.model.Hotel;
+import org.springframework.http.ResponseEntity;
 
 public interface HotelService {
-    Hotel getCapacityForHotelId(Long id);
+    ResponseEntity<?> getCapacityForHotelId(Long id);
 
-    Integer calculatePriceForReservation(ReservationDTO resDto);
+    ResponseEntity<?> calculatePriceForReservation(ReservationDTO resDto);
 }

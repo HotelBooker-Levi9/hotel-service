@@ -17,17 +17,12 @@ public class HotelController {
 
 
         @GetMapping("/capacityForHotel/{id}")
-        public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) throws NullPointerException {
-                try {
-                        return new ResponseEntity<>(hotelService.getCapacityForHotelId(id).getCapacity(), HttpStatus.OK);
-                } catch (NullPointerException e) {
-                        System.out.println(e.getMessage());
-                        return null;
-                }
+        public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
+                return hotelService.getCapacityForHotelId(id);
         }
 
         @PostMapping("/priceForReservation")
         public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
-                return new ResponseEntity<>(hotelService.calculatePriceForReservation(resDto), HttpStatus.OK);
+                return hotelService.calculatePriceForReservation(resDto);
         }
 }

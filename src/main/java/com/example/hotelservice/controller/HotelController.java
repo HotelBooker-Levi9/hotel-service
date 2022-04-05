@@ -15,12 +15,12 @@ public class HotelController {
         private HotelService hotelService;
 
 
-        @GetMapping("/getCapacityForHotelId/{id}")
+        @GetMapping("/capacityForHotel/{id}")
         public Integer getCapacityForHotelId(@PathVariable Long id) {
                 return hotelService.getCapacityForHotelId(id).getCapacity();
         }
 
-        @PostMapping("/calculatePriceForReservation")
+        @PostMapping("/priceForReservation")
         public Integer calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
                 return hotelService.calculatePriceForReservation(resDto);
         }

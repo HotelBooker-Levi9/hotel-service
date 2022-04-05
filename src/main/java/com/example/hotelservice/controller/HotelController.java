@@ -4,6 +4,7 @@ import com.example.hotelservice.dto.ReservationDTO;
 import com.example.hotelservice.service.CityService;
 import com.example.hotelservice.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,17 @@ public class HotelController {
 
 
         @GetMapping("/capacityForHotel/{id}")
-        public Integer getCapacityForHotelId(@PathVariable Long id) {
-                return hotelService.getCapacityForHotelId(id).getCapacity();
+        public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) throws NullPointerException {
+                try {
+                        return new ResponseEntity<>(hotelService.getCapacityForHotelId(id).getCapacity(), HttpStatus.OK);
+                } catch (NullPointerException e) {
+                        System.out.println(e.getMessage());
+                        return null;
+                }
         }
 
         @PostMapping("/priceForReservation")
-        public Integer calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
-                return hotelService.calculatePriceForReservation(resDto);
+        public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
+                return new ResponseEntity<>(hotelService.calculatePriceForReservation(resDto), HttpStatus.OK);
         }
 }

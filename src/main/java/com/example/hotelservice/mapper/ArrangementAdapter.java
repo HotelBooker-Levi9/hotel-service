@@ -15,7 +15,7 @@ public class ArrangementAdapter {
         return arrangements;
     }
 
-    private static Arrangement convertHotelToArrangement(Hotel hotel) {
+    public static Arrangement convertHotelToArrangement(Hotel hotel) {
         return new Arrangement(hotel.getId(), hotel.getName(), hotel.getImageUrl(), hotel.getDescription(), hotel.getPricePerDay(),
                                 hotel.getCapacity(), hotel.getIsDeleted(), hotel.getCity().getName(), hotel.getCity().getDestination().getName());
     }

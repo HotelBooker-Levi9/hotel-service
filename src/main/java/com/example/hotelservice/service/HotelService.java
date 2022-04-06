@@ -12,4 +12,6 @@ public interface HotelService {
     ResponseEntity<?> getAll();
 
     ResponseEntity<?> search(SearchDTO searchDto);
+
+    ResponseEntity<?> top10();
 }

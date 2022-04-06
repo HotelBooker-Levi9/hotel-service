@@ -69,6 +69,27 @@ public class HotelServiceImpl implements HotelService {
         }
     }
 
+    @Override
+    public ResponseEntity<?> top10() {
+        List<Arrangement> top10 = new ArrayList<>();
+        Integer i = 0;
+        for (HotelReervationsCount hotelCount : getTop10VisitedHotels().getBody()) {
+            top10.add(getArrangementForHotel(hotelCount.getHotelId()));
+            if(++i > 9)
+                break;
+        }
+        return new ResponseEntity<>(top10, HttpStatus.OK);
+    }
+
+    private Arrangement getArrangementForHotel(Long hotelId) {
+        return ArrangementAdapter.convertHotelToArrangement(hotelRepository.findById(hotelId).get());
+    }
+
+    private ResponseEntity<HotelReervationsCount[]> getTop10VisitedHotels() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForEntity(GATEWAY_URL + "reservations/top10hotels", HotelReervationsCount[].class);
+    }
+
     private Long[] getUnavailableHotelIdsForDateRange(Date checkInDate, Date checkOutDate, Integer guestNum) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), Long[].class);

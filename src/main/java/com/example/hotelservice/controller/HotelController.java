@@ -36,4 +36,9 @@ public class HotelController {
         public ResponseEntity<?> search(@RequestBody SearchDTO searchDto) {
                 return hotelService.search(searchDto);
         }
+
+        @GetMapping("/top10")
+        public ResponseEntity<?> top10() {
+                return hotelService.top10();
+        }
 }

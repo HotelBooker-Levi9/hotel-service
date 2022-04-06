@@ -40,4 +40,10 @@ public class HotelController {
               hotelService.updateHotel(hotelDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         }
+        @PutMapping(value="/{hotelId}")
+        public ResponseEntity<Void> deleteHotel(@PathVariable Long hotelId) {
+        	
+              hotelService.removeHotel(hotelId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
 }

@@ -1,5 +1,6 @@
 package com.example.hotelservice.serviceImpl;
 
+
 import com.example.hotelservice.mapper.CityAdapter;
 import com.example.hotelservice.mapper.HotelAdapter;
 import com.example.hotelservice.model.City;
@@ -11,12 +12,16 @@ import com.example.hotelservice.repository.HotelRepository;
 import com.example.hotelservice.service.CityService;
 import com.example.hotelservice.service.HotelService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class HotelServiceImpl implements HotelService {
@@ -70,7 +75,36 @@ public class HotelServiceImpl implements HotelService {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+
 	
-	
-	
+	@Transactional
+	@Override
+	public ResponseEntity<?> removeHotel(Long hotelId) {	
+			        try {
+			        	Hotel hotel=hotelRepository.findById(hotelId).get();
+			        	
+			        	Date dateNow=new Date();
+			        	String pattern = "yyyy-MM-dd";
+			        	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			            RestTemplate restTemplate = new RestTemplate();
+			            ResponseEntity<Boolean> reserved = restTemplate.getForEntity( "http://localhost:8100/reservations/reservationInFuture/" + simpleDateFormat.format(dateNow) +"/"+ hotelId, Boolean.class);
+			            
+						if(reserved.getBody().equals(true)) {
+			            	
+			    			if(hotel!=null) {
+			    				hotel.setIsDeleted(true);
+			    				new ResponseEntity<>(HttpStatus.OK);
+			    			}
+			            }else {
+			            	 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			            }
+			            
+			            } catch (Exception e) {
+			            System.out.println(e.getMessage());
+			            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			           
+			        }
+					return null;
+	}
 }
+

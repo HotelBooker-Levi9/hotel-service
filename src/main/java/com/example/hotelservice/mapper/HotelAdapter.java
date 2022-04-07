@@ -18,7 +18,7 @@ public class HotelAdapter {
 	        res.setDescription(dto.getDescription());
 	        res.setPricePerDay(dto.getPricePerDay());
 	        res.setCapacity(dto.getCapacity());
-	        res.setIsDeleted(dto.isDeleted());
+	        res.setIsDeleted(dto.getIsDeleted());
 	        res.setCity(CityAdapter.convertDto(dto.getCityDTO()));
 	        return res;
 	    }
@@ -31,7 +31,7 @@ public class HotelAdapter {
 	        res.setDescription(hotel.getDescription());
 	        res.setPricePerDay(hotel.getPricePerDay());
 	        res.setCapacity(hotel.getCapacity());
-	        res.setDeleted(hotel.getIsDeleted());
+	        res.setIsDeleted(hotel.getIsDeleted());
 	        res.setCityDTO(CityAdapter.convertToDTO(hotel.getCity()));
 	        return res;
 	    }

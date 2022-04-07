@@ -47,7 +47,7 @@ public class HotelServiceImpl implements HotelService {
 		       res.setDescription(hotelDTO.getDescription());
 		       res.setPricePerDay(hotelDTO.getPricePerDay());
 		       res.setCapacity(hotelDTO.getCapacity());
-		       res.setIsDeleted(hotelDTO.isDeleted());
+		       res.setIsDeleted(hotelDTO.getIsDeleted());
 		       res.setCity(cityRepository.findById(hotelDTO.getCityDTO().getId()).get());
 		        hotelRepository.save(res);
 		        return new ResponseEntity<>(HttpStatus.CREATED);
@@ -69,7 +69,7 @@ public class HotelServiceImpl implements HotelService {
 		       hotel.setDescription(hotelDTO.getDescription());
 		       hotel.setPricePerDay(hotelDTO.getPricePerDay());
 		       hotel.setCapacity(hotelDTO.getCapacity());
-		       hotel.setIsDeleted(hotelDTO.isDeleted());
+		       hotel.setIsDeleted(hotelDTO.getIsDeleted());
 		       hotel.setCity(cityRepository.findById(hotelDTO.getCityDTO().getId()).get());
 		        hotelRepository.save(hotel);
 		        return new ResponseEntity<>(HttpStatus.OK);

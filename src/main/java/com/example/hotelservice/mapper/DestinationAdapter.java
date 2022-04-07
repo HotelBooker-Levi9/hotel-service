@@ -12,6 +12,7 @@ public class DestinationAdapter {
 		destination.setId(destinationDTO.getId());
 		destination.setName(destinationDTO.getName());
 		destination.setImageUrl(destinationDTO.getImageUrl());
+		destination.setIsDeleted(destinationDTO.getIsDeleted());
 		return destination;
 	}
 	public static DestinationDTO convertToDTO(Destination destination) {
@@ -19,6 +20,7 @@ public class DestinationAdapter {
 		destinationDTO.setId(destination.getId());
 		destinationDTO.setName(destination.getName());
 		destinationDTO.setImageUrl(destination.getImageUrl());
+		destinationDTO.setIsDeleted(destination.getIsDeleted());
 		return destinationDTO;
 	}
 	public static List<DestinationDTO> convertListToDTO(List<Destination> destinations) {

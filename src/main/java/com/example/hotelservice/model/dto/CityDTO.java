@@ -16,7 +16,7 @@ public class CityDTO {
 	private Long id;
 	private String name;
 	private String imageUrl;
-	private boolean isDeleted;
+	private Boolean isDeleted;
 	private DestinationDTO destinationDTO;
 	
 

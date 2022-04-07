@@ -34,6 +34,7 @@ public class CityController {
 
     @PostMapping("/addCity")
     public void addCity(@RequestBody CityDTO cityDTO) {
+    	System.out.println("City dtooo add"+cityDTO);
           cityService.addCity(cityDTO);
         
     }

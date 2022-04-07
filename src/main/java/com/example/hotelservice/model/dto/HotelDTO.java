@@ -21,7 +21,7 @@ public class HotelDTO {
 	private String description;
 	private Integer pricePerDay;
 	private Integer capacity;
-	private boolean isDeleted;
+	private Boolean isDeleted;
 	private CityDTO cityDTO;
 
 

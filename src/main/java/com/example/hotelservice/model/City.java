@@ -22,7 +22,7 @@ public class City {
     private Long id;
     private String name;
     private String imageUrl;
-    private boolean isDeleted;
+    private Boolean isDeleted;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "destination_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

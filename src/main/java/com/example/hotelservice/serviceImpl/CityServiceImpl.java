@@ -45,7 +45,7 @@ public class CityServiceImpl implements CityService {
 		       res.setId(cityDTO.getId());
 		       res.setImageUrl(cityDTO.getImageUrl());
 		       res.setName(cityDTO.getName());
-		       res.setDeleted(cityDTO.isDeleted());
+		       res.setIsDeleted(cityDTO.getIsDeleted());
 		       res.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
 		        cityRepository.save(res);
 		        return new ResponseEntity<>(HttpStatus.CREATED);
@@ -88,7 +88,7 @@ public class CityServiceImpl implements CityService {
 						hotelRepository.save(hotel);
 					
 					}
-					city.setDeleted(true);
+					city.setIsDeleted(true);
 				}			
 			}
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -135,7 +135,7 @@ public class CityServiceImpl implements CityService {
 			city.setName(cityDTO.getName());
 			city.setImageUrl(cityDTO.getImageUrl());
 			
-			city.setDeleted(cityDTO.isDeleted());
+			city.setIsDeleted(cityDTO.getIsDeleted());
 			city.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
 	         cityRepository.save(city);
 	        return new ResponseEntity<>(HttpStatus.OK);

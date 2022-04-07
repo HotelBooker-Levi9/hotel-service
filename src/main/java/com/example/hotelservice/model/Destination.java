@@ -23,7 +23,7 @@ public class Destination {
     private Long id;
     private String name;
     private String imageUrl;
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @OneToMany(mappedBy = "destination", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)

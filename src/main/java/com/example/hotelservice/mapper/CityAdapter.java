@@ -19,7 +19,7 @@ public class CityAdapter {
 	        res.setId(dto.getId());
 	        res.setName(dto.getName());
 	        res.setImageUrl(dto.getImageUrl());
-	        res.setDeleted(dto.isDeleted());
+	        res.setIsDeleted(dto.getIsDeleted());
 	        res.setDestination(DestinationAdapter.convertDtoTo(dto.getDestinationDTO()));
 	        return res;
 	    }
@@ -28,7 +28,7 @@ public class CityAdapter {
 		 cityDTO.setId(city.getId());
 		 cityDTO.setName(city.getName());
 		 cityDTO.setImageUrl(city.getImageUrl());
-		 cityDTO.setDeleted(city.isDeleted());
+		 cityDTO.setIsDeleted(city.getIsDeleted());
 		 cityDTO.setDestinationDTO(DestinationAdapter.convertToDTO(city.getDestination()));
 			return cityDTO;
 			

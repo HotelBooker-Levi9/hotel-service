@@ -48,6 +48,7 @@ public class DestinationServiceImpl implements DestinationService {
 			       res.setId(destinationDTO.getId());
 			       res.setImageUrl(destinationDTO.getImageUrl());
 			       res.setName(destinationDTO.getName());
+			       res.setIsDeleted(destinationDTO.getIsDeleted());
 			       
 			        destinationRepository.save(res);
 			        return new ResponseEntity<>(HttpStatus.CREATED);
@@ -66,6 +67,7 @@ public class DestinationServiceImpl implements DestinationService {
 			Destination des=destinationRepository.findById(res.getId()).get();
 			des.setImageUrl(destinationDTO.getImageUrl());
 			des.setName(destinationDTO.getName());
+			des.setIsDeleted(destinationDTO.getIsDeleted());
 	         destinationRepository.save(des);
 	        return new ResponseEntity<>(HttpStatus.OK);
 
@@ -120,55 +122,17 @@ public class DestinationServiceImpl implements DestinationService {
 				for(City city:cities) {
 					cityService.removeCity(city.getId(), true);	
 				}
-				destination.setDeleted(true);
+				destination.setIsDeleted(true);
 
 				return new ResponseEntity<>(HttpStatus.OK);
 			}
 
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		destination.setDeleted(true);
+		destination.setIsDeleted(true);
 
 		return new ResponseEntity<>(HttpStatus.OK);
-//		for(City city:cities) {
-//			hotelsForCities.addAll(hotelRepository.findAllHotelsForCity(city.getId()));
-//		
-//		List<Hotel> noReservation=new ArrayList<>();
-//		if(!hotelsForCities.isEmpty()) {
-//			for(Hotel hotel:hotelsForCities) {
-//				Date dateNow=new Date();
-//	        	String pattern = "yyyy-MM-dd";
-//	        	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//	            RestTemplate restTemplate = new RestTemplate();
-//	            ResponseEntity<Boolean> reserved = restTemplate.getForEntity( "http://localhost:8100/reservations/reservationInFuture/" + simpleDateFormat.format(dateNow) +"/"+ hotel.getId(), Boolean.class);
-//	            if(reserved.getBody().equals(true)) {
-//	            		
-//	    				noReservation.add(hotel);
-//    		
-//	            }
-//	            else {
-//	            	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	            }
-//			}
-//			if(noReservation.equals(hotelsForCities)) {
-//				for(Hotel hotel:noReservation) {
-//					
-//					hotel.setIsDeleted(true);
-//					hotelRepository.save(hotel);
-//				
-//			}
-//				city.setDeleted(true);
-//				
-//				new ResponseEntity<>(HttpStatus.OK);
-//				
-//			
-//		}
-//				
-//		}
-//		else {
-//       	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//       }
-//		}
+
 		}
 		catch(Exception ex) {
 			ex.getMessage();

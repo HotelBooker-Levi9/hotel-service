@@ -17,6 +17,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -106,8 +109,8 @@ public class CityServiceImpl implements CityService {
 		try {
 			CityDTO city=CityAdapter.convertToDTO(cityRepository.findById(id).get());
 			return new ResponseEntity<CityDTO>(city,HttpStatus.OK);
-		}catch(Exception ex) {
-			ex.getMessage();
+		}catch(NoResultException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return null;
 		
@@ -117,8 +120,8 @@ public class CityServiceImpl implements CityService {
 			List<CityDTO> cities=CityAdapter.convertListToDTO(cityRepository.findAll());
 			
 			return new ResponseEntity<List<CityDTO>>(cities,HttpStatus.OK);
-		}catch(Exception ex) {
-			ex.getMessage();
+		}catch(NoResultException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return null;
 		

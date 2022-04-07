@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -112,8 +114,8 @@ public class HotelServiceImpl implements HotelService {
 		try {
 			HotelDTO hotelDTO=HotelAdapter.convertToDTO(hotelRepository.findById(id).get());
 			return new ResponseEntity<HotelDTO>(hotelDTO,HttpStatus.OK);
-		}catch(Exception ex) {
-			ex.getMessage();
+		}catch(NoResultException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return null;
 		
@@ -123,8 +125,8 @@ public class HotelServiceImpl implements HotelService {
 			List<HotelDTO> hotels=HotelAdapter.convertListToDTO(hotelRepository.findAll());
 			
 			return new ResponseEntity<List<HotelDTO>>(hotels,HttpStatus.OK);
-		}catch(Exception ex) {
-			ex.getMessage();
+		}catch(NoResultException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return null;
 		

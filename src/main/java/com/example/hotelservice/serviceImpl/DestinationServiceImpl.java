@@ -18,6 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,8 +80,8 @@ public class DestinationServiceImpl implements DestinationService {
 		try {
 			DestinationDTO destinationDTO=DestinationAdapter.convertToDTO(destinationRepository.findById(id).get());
 			return new ResponseEntity<DestinationDTO>(destinationDTO,HttpStatus.OK);
-		}catch(Exception ex) {
-			ex.getMessage();
+		}catch(NoResultException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return null;
 		
@@ -89,8 +92,8 @@ public class DestinationServiceImpl implements DestinationService {
 			List<DestinationDTO> destinations=DestinationAdapter.convertListToDTO(destinationRepository.findAll());
 			
 			return new ResponseEntity<List<DestinationDTO>>(destinations,HttpStatus.OK);
-		}catch(Exception ex) {
-			ex.getMessage();
+		}catch(NoResultException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return null;
 		

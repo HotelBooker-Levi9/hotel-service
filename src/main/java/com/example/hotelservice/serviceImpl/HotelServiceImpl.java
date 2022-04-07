@@ -23,12 +23,10 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public ResponseEntity<?> getCapacityForHotelId(Long id) {
-        try {
-            return new ResponseEntity<>(hotelRepository.findById(id).get().getCapacity(), HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        Optional<Hotel> hotel = hotelRepository.findById(id);
+        if(hotel.isPresent())
+            return new ResponseEntity<>(hotel.get().getCapacity(), HttpStatus.OK);
+        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -36,13 +34,10 @@ public class HotelServiceImpl implements HotelService {
         Long diffInMillies = Math.abs(resDto.getCheckOutDate().getTime() - resDto.getCheckInDate().getTime());
         Long numberOfDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-        try {
-            Hotel hotel = hotelRepository.findById(resDto.getHotelId()).get();
-            return new ResponseEntity<>(Math.toIntExact(numberOfDays) * hotel.getPricePerDay() * resDto.getGuestNumber(), HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        Optional<Hotel> hotel = hotelRepository.findById(resDto.getHotelId());
+        if(hotel.isPresent())
+            return new ResponseEntity<>(Math.toIntExact(numberOfDays) * hotel.get().getPricePerDay() * resDto.getGuestNumber(), HttpStatus.OK);
+        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -54,31 +49,32 @@ public class HotelServiceImpl implements HotelService {
     public ResponseEntity<?> search(SearchDTO searchDto) {
         List<Long> unavailableHotels = Arrays.asList(getUnavailableHotelIdsForDateRange(searchDto.getCheckInDate(), searchDto.getCheckOutDate(), searchDto.getGuestNum()));
         List<Arrangement> arrangements;
-        try {
-            if (unavailableHotels.isEmpty())
-                arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResultsWhenDontHaveUnavailable(
-                        searchDto.getHotelName(), searchDto.getPricePerDay(), searchDto.getCityName(), searchDto.getDestinationName(), searchDto.getGuestNum()));
-            else
-                arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResults(
-                        searchDto.getHotelName(), searchDto.getPricePerDay(), searchDto.getCityName(), searchDto.getDestinationName(), unavailableHotels, searchDto.getGuestNum()));
 
-            return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        if (unavailableHotels.isEmpty())
+            arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResultsWhenDontHaveUnavailable(
+                    searchDto.getHotelName(), searchDto.getPricePerDay(), searchDto.getCityName(), searchDto.getDestinationName(), searchDto.getGuestNum()));
+        else
+            arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResults(
+                    searchDto.getHotelName(), searchDto.getPricePerDay(), searchDto.getCityName(), searchDto.getDestinationName(), unavailableHotels, searchDto.getGuestNum()));
+
+        return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
     }
 
     @Override
     public ResponseEntity<?> top10() {
         List<Arrangement> top10 = new ArrayList<>();
-        Integer i = 0;
-        for (HotelReervationsCount hotelCount : getTop10VisitedHotels().getBody()) {
-            top10.add(getArrangementForHotel(hotelCount.getHotelId()));
-            if(++i > 9)
-                break;
+        int i = 0;
+        try {
+            for (HotelReervationsCount hotelCount : Objects.requireNonNull(getTop10VisitedHotels().getBody())) {
+                top10.add(getArrangementForHotel(hotelCount.getHotelId()));
+                if (++i > 9)
+                    break;
+            }
+            return new ResponseEntity<>(top10, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(top10, HttpStatus.OK);
     }
 
     private Arrangement getArrangementForHotel(Long hotelId) {

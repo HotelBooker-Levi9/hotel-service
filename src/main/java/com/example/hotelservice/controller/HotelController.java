@@ -3,11 +3,13 @@ package com.example.hotelservice.controller;
 
 
 import com.example.hotelservice.model.dto.CityDTO;
+import com.example.hotelservice.model.dto.DestinationDTO;
 import com.example.hotelservice.model.dto.HotelDTO;
 import com.example.hotelservice.repository.HotelRepository;
 import com.example.hotelservice.service.DestinationService;
 import com.example.hotelservice.service.HotelService;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -46,4 +49,16 @@ public class HotelController {
               hotelService.removeHotel(hotelId);
             return new ResponseEntity<>(HttpStatus.OK);
         }
+        
+        @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+       	public ResponseEntity<HotelDTO> getHotelById(@PathVariable Long id) {
+       		
+       		return hotelService.findOne(id);
+       	}
+
+           @RequestMapping(value = "/", method = RequestMethod.GET)
+       	public ResponseEntity<List<HotelDTO>> getAllHotels() {
+       		
+       		return hotelService.findAll();
+       	}
 }

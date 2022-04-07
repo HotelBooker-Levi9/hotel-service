@@ -2,6 +2,7 @@ package com.example.hotelservice.serviceImpl;
 
 
 import com.example.hotelservice.mapper.CityAdapter;
+import com.example.hotelservice.mapper.DestinationAdapter;
 import com.example.hotelservice.mapper.HotelAdapter;
 import com.example.hotelservice.model.City;
 import com.example.hotelservice.model.Hotel;
@@ -14,6 +15,7 @@ import com.example.hotelservice.service.HotelService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -105,6 +107,28 @@ public class HotelServiceImpl implements HotelService {
 			           
 			        }
 					return null;
+	}
+	public ResponseEntity<HotelDTO> findOne(Long id) {
+		try {
+			HotelDTO hotelDTO=HotelAdapter.convertToDTO(hotelRepository.findById(id).get());
+			return new ResponseEntity<HotelDTO>(hotelDTO,HttpStatus.OK);
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		return null;
+		
+	}
+	public ResponseEntity<List<HotelDTO>> findAll(){
+		try {
+			List<HotelDTO> hotels=HotelAdapter.convertListToDTO(hotelRepository.findAll());
+			
+			return new ResponseEntity<List<HotelDTO>>(hotels,HttpStatus.OK);
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		return null;
+		
+		
 	}
 }
 

@@ -42,7 +42,7 @@ public class CityServiceImpl implements CityService {
 		       res.setId(cityDTO.getId());
 		       res.setImageUrl(cityDTO.getImageUrl());
 		       res.setName(cityDTO.getName());
-		       
+		       res.setDeleted(cityDTO.isDeleted());
 		       res.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
 		        cityRepository.save(res);
 		        return new ResponseEntity<>(HttpStatus.CREATED);
@@ -56,7 +56,7 @@ public class CityServiceImpl implements CityService {
 	}
 	@Transactional
 	@Override
-	public ResponseEntity<?> removeCity(Long id) {
+	public ResponseEntity<?> removeCity(Long id, boolean delete) {
 		try {
 		City city=cityRepository.findById(id).get();
 		List<Hotel> hotelsForCity= hotelRepository.findAllHotelsForCity(id);
@@ -77,18 +77,19 @@ public class CityServiceImpl implements CityService {
 	            	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	            }
 			}
-			if(noReservation.equals(hotelsForCity)) {
-				for(Hotel hotel:noReservation) {
+			if(delete) {
+				if(noReservation.equals(hotelsForCity)) {
+					for(Hotel hotel:noReservation) {
+						
+						hotel.setIsDeleted(true);
+						hotelRepository.save(hotel);
 					
-					hotel.setIsDeleted(true);
-					hotelRepository.save(hotel);
-				
+					}
+					city.setDeleted(true);
+				}			
 			}
-				city.setDeleted(true);
-				new ResponseEntity<>(HttpStatus.OK);
-			
-		}
-				
+			return new ResponseEntity<>(HttpStatus.OK);
+
 		}
 		else {
        	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -101,14 +102,26 @@ public class CityServiceImpl implements CityService {
 		
 	}
 	@Override
-	public City findOne(Long id) {
+	public ResponseEntity<CityDTO> findOne(Long id) {
 		try {
-			City city=cityRepository.findById(id).get();
-			return city;
+			CityDTO city=CityAdapter.convertToDTO(cityRepository.findById(id).get());
+			return new ResponseEntity<CityDTO>(city,HttpStatus.OK);
 		}catch(Exception ex) {
 			ex.getMessage();
 		}
 		return null;
+		
+	}
+	public ResponseEntity<List<CityDTO>> findAll(){
+		try {
+			List<CityDTO> cities=CityAdapter.convertListToDTO(cityRepository.findAll());
+			
+			return new ResponseEntity<List<CityDTO>>(cities,HttpStatus.OK);
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		return null;
+		
 		
 	}
 	@Override
@@ -116,8 +129,9 @@ public class CityServiceImpl implements CityService {
 		try {
 			City res = CityAdapter.convertDto(cityDTO);
 			City city=cityRepository.findById(res.getId()).get();
-			city.setImageUrl(cityDTO.getImageUrl());
 			city.setName(cityDTO.getName());
+			city.setImageUrl(cityDTO.getImageUrl());
+			
 			city.setDeleted(cityDTO.isDeleted());
 			city.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
 	         cityRepository.save(city);

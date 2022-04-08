@@ -1,30 +1,240 @@
-INSERT INTO destination(`id`,`image_url`,`name`)
-        VALUES (1, "slika", "Serbia");
-INSERT INTO destination(`id`,`image_url`,`name`)
-        VALUES (2, "slika", "Montenegro");
+--INSERT INTO destination(`id`,`image_url`,`name`)
+--        VALUES (1, "slika", "Serbia");
+--INSERT INTO destination(`id`,`image_url`,`name`)
+--        VALUES (2, "slika", "Montenegro");
+insert into destination (id, name, image_url) values (1, 'Yehudit', 'Burnes');
+insert into destination (id, name, image_url) values (2, 'Franz', 'Leckie');
+insert into destination (id, name, image_url) values (3, 'Felice', 'Boycott');
+insert into destination (id, name, image_url) values (4, 'Dennie', 'Kinsett');
+insert into destination (id, name, image_url) values (5, 'Nicoli', 'Bucksey');
+insert into destination (id, name, image_url) values (6, 'Karie', 'Bisco');
+insert into destination (id, name, image_url) values (7, 'Xylina', 'Assiter');
+insert into destination (id, name, image_url) values (8, 'Christie', 'Laverenz');
+insert into destination (id, name, image_url) values (9, 'Kit', 'Trundell');
+insert into destination (id, name, image_url) values (10, 'Clayborn', 'Sarjant');
 
-INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
-        VALUES (1, "slika", "Novi Sad", 1);
-INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
-        VALUES (2, "slika", "Tivat", 2);
-INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
-        VALUES (3, "slika", "Apatin", 1);
-INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
-        VALUES (4, "slika", "Podgorica", 2);
-INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
-        VALUES (5, "slika", "Ruski Krstur", 1);
-INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
-        VALUES (6, "slika", "Danilovgrad", 1);
+--INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
+--        VALUES (1, "slika", "Novi Sad", 1);
+--INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
+--        VALUES (2, "slika", "Tivat", 2);
+--INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
+--        VALUES (3, "slika", "Apatin", 1);
+--INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
+--        VALUES (4, "slika", "Podgorica", 2);
+--INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
+--        VALUES (5, "slika", "Ruski Krstur", 1);
+--INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
+--        VALUES (6, "slika", "Danilovgrad", 1);
+insert into city (id, image_url, name, destination_id) values (1, 'Pannier', 'tmessenger0', 5);
+insert into city (id, image_url, name, destination_id) values (2, 'Cardguard', 'gert1', 1);
+insert into city (id, image_url, name, destination_id) values (3, 'Tempsoft', 'cherley2', 5);
+insert into city (id, image_url, name, destination_id) values (4, 'Sonair', 'bmattei3', 10);
+insert into city (id, image_url, name, destination_id) values (5, 'Kanlam', 'sdougherty4', 4);
+insert into city (id, image_url, name, destination_id) values (6, 'Tampflex', 'trichly5', 2);
+insert into city (id, image_url, name, destination_id) values (7, 'Temp', 'mcoope6', 2);
+insert into city (id, image_url, name, destination_id) values (8, 'Subin', 'taccombe7', 6);
+insert into city (id, image_url, name, destination_id) values (9, 'Treeflex', 'harthy8', 7);
+insert into city (id, image_url, name, destination_id) values (10, 'Ronstring', 'seberts9', 9);
+insert into city (id, image_url, name, destination_id) values (11, 'Biodex', 'btowrissa', 1);
+insert into city (id, image_url, name, destination_id) values (12, 'Voyatouch', 'cmacgowingb', 1);
+insert into city (id, image_url, name, destination_id) values (13, 'Voltsillam', 'rtoppc', 5);
+insert into city (id, image_url, name, destination_id) values (14, 'Tempsoft', 'ngillionsd', 6);
+insert into city (id, image_url, name, destination_id) values (15, 'Zoolab', 'rwestwatere', 9);
+insert into city (id, image_url, name, destination_id) values (16, 'Viva', 'echrishopf', 1);
+insert into city (id, image_url, name, destination_id) values (17, 'Fintone', 'tmeatyardg', 8);
+insert into city (id, image_url, name, destination_id) values (18, 'Domainer', 'jbromehedh', 4);
+insert into city (id, image_url, name, destination_id) values (19, 'Matsoft', 'pboarderi', 5);
+insert into city (id, image_url, name, destination_id) values (20, 'Bitchip', 'jbirkmyrej', 7);
+insert into city (id, image_url, name, destination_id) values (21, 'Redhold', 'tlupartok', 8);
+insert into city (id, image_url, name, destination_id) values (22, 'Alpha', 'sgrinstedl', 5);
+insert into city (id, image_url, name, destination_id) values (23, 'Rank', 'jcookem', 2);
+insert into city (id, image_url, name, destination_id) values (24, 'Cookley', 'dguinann', 9);
+insert into city (id, image_url, name, destination_id) values (25, 'Alpha', 'mogleso', 3);
+insert into city (id, image_url, name, destination_id) values (26, 'Alphazap', 'bboddymeadp', 2);
+insert into city (id, image_url, name, destination_id) values (27, 'Cardguard', 'ramottq', 4);
+insert into city (id, image_url, name, destination_id) values (28, 'Stringtough', 'ecriminr', 4);
+insert into city (id, image_url, name, destination_id) values (29, 'Namfix', 'rscoffhams', 10);
+insert into city (id, image_url, name, destination_id) values (30, 'Flowdesk', 'broydent', 4);
+insert into city (id, image_url, name, destination_id) values (31, 'Otcom', 'ableibaumu', 5);
+insert into city (id, image_url, name, destination_id) values (32, 'Subin', 'bwhitesonv', 10);
+insert into city (id, image_url, name, destination_id) values (33, 'Otcom', 'jpontinw', 8);
+insert into city (id, image_url, name, destination_id) values (34, 'Holdlamis', 'vfettiplacex', 2);
+insert into city (id, image_url, name, destination_id) values (35, 'Duobam', 'kaldousy', 10);
+insert into city (id, image_url, name, destination_id) values (36, 'Zathin', 'rhollingsbeez', 2);
+insert into city (id, image_url, name, destination_id) values (37, 'Gembucket', 'nfirk10', 6);
+insert into city (id, image_url, name, destination_id) values (38, 'Andalax', 'ccrockford11', 4);
+insert into city (id, image_url, name, destination_id) values (39, 'Konklab', 'aaronoff12', 4);
+insert into city (id, image_url, name, destination_id) values (40, 'Mat Lam Tam', 'wnewlan13', 10);
+insert into city (id, image_url, name, destination_id) values (41, 'Redhold', 'bgoadsby14', 5);
+insert into city (id, image_url, name, destination_id) values (42, 'Tampflex', 'msomerlie15', 2);
+insert into city (id, image_url, name, destination_id) values (43, 'Redhold', 'lfashion16', 8);
+insert into city (id, image_url, name, destination_id) values (44, 'Viva', 'gandrejs17', 6);
+insert into city (id, image_url, name, destination_id) values (45, 'Flowdesk', 'fmartyn18', 10);
+insert into city (id, image_url, name, destination_id) values (46, 'Daltfresh', 'djosefs19', 8);
+insert into city (id, image_url, name, destination_id) values (47, 'Stronghold', 'mcotterel1a', 9);
+insert into city (id, image_url, name, destination_id) values (48, 'Stronghold', 'jmarrington1b', 10);
+insert into city (id, image_url, name, destination_id) values (49, 'Tres-Zap', 'iashtonhurst1c', 4);
+insert into city (id, image_url, name, destination_id) values (50, 'Bigtax', 'fcrosscombe1d', 7);
+insert into city (id, image_url, name, destination_id) values (51, 'Gembucket', 'gclulee1e', 7);
+insert into city (id, image_url, name, destination_id) values (52, 'Home Ing', 'ddekeyser1f', 6);
+insert into city (id, image_url, name, destination_id) values (53, 'Cookley', 'tgiacobbinijacob1g', 5);
+insert into city (id, image_url, name, destination_id) values (54, 'Sonair', 'tkennford1h', 5);
+insert into city (id, image_url, name, destination_id) values (55, 'Alphazap', 'ebrayn1i', 6);
+insert into city (id, image_url, name, destination_id) values (56, 'Stim', 'jmargaritelli1j', 9);
+insert into city (id, image_url, name, destination_id) values (57, 'Tampflex', 'gkuhnke1k', 2);
+insert into city (id, image_url, name, destination_id) values (58, 'Konklab', 'lscholz1l', 5);
+insert into city (id, image_url, name, destination_id) values (59, 'Cardify', 'taikenhead1m', 4);
+insert into city (id, image_url, name, destination_id) values (60, 'Lotlux', 'clidgate1n', 10);
+insert into city (id, image_url, name, destination_id) values (61, 'Voltsillam', 'kwagstaff1o', 8);
+insert into city (id, image_url, name, destination_id) values (62, 'Lotstring', 'jprue1p', 10);
+insert into city (id, image_url, name, destination_id) values (63, 'Aerified', 'gsuckling1q', 5);
+insert into city (id, image_url, name, destination_id) values (64, 'Domainer', 'mbodycote1r', 4);
+insert into city (id, image_url, name, destination_id) values (65, 'Fixflex', 'lsargint1s', 4);
+insert into city (id, image_url, name, destination_id) values (66, 'Bitchip', 'twestfalen1t', 9);
+insert into city (id, image_url, name, destination_id) values (67, 'Duobam', 'gjakab1u', 2);
+insert into city (id, image_url, name, destination_id) values (68, 'Cardguard', 'akeeves1v', 8);
+insert into city (id, image_url, name, destination_id) values (69, 'Alphazap', 'ptreble1w', 5);
+insert into city (id, image_url, name, destination_id) values (70, 'Job', 'llumsden1x', 8);
+insert into city (id, image_url, name, destination_id) values (71, 'Sonsing', 'bellett1y', 10);
+insert into city (id, image_url, name, destination_id) values (72, 'Pannier', 'cdows1z', 3);
+insert into city (id, image_url, name, destination_id) values (73, 'Overhold', 'cspeek20', 2);
+insert into city (id, image_url, name, destination_id) values (74, 'Otcom', 'gloines21', 2);
+insert into city (id, image_url, name, destination_id) values (75, 'Asoka', 'uscamal22', 2);
+insert into city (id, image_url, name, destination_id) values (76, 'Tres-Zap', 'fkilfeather23', 6);
+insert into city (id, image_url, name, destination_id) values (77, 'Ronstring', 'acamillo24', 10);
+insert into city (id, image_url, name, destination_id) values (78, 'Gembucket', 'amongenot25', 10);
+insert into city (id, image_url, name, destination_id) values (79, 'Tres-Zap', 'mchaimson26', 6);
+insert into city (id, image_url, name, destination_id) values (80, 'Flexidy', 'mknowlden27', 2);
+insert into city (id, image_url, name, destination_id) values (81, 'Prodder', 'bmoorey28', 10);
+insert into city (id, image_url, name, destination_id) values (82, 'Toughjoyfax', 'ewoller29', 10);
+insert into city (id, image_url, name, destination_id) values (83, 'Stringtough', 'frendall2a', 1);
+insert into city (id, image_url, name, destination_id) values (84, 'Daltfresh', 'kbougourd2b', 5);
+insert into city (id, image_url, name, destination_id) values (85, 'Greenlam', 'lshaxby2c', 8);
+insert into city (id, image_url, name, destination_id) values (86, 'Prodder', 'drevie2d', 4);
+insert into city (id, image_url, name, destination_id) values (87, 'Treeflex', 'emcgourty2e', 8);
+insert into city (id, image_url, name, destination_id) values (88, 'Trippledex', 'achadderton2f', 2);
+insert into city (id, image_url, name, destination_id) values (89, 'Lotlux', 'dpauly2g', 10);
+insert into city (id, image_url, name, destination_id) values (90, 'Bytecard', 'mstandbridge2h', 4);
+insert into city (id, image_url, name, destination_id) values (91, 'Treeflex', 'bsnelgar2i', 5);
+insert into city (id, image_url, name, destination_id) values (92, 'Stringtough', 'lmunehay2j', 1);
+insert into city (id, image_url, name, destination_id) values (93, 'Opela', 'btuttiett2k', 10);
+insert into city (id, image_url, name, destination_id) values (94, 'Transcof', 'epinniger2l', 6);
+insert into city (id, image_url, name, destination_id) values (95, 'Zathin', 'jrollo2m', 8);
+insert into city (id, image_url, name, destination_id) values (96, 'Lotlux', 'cgroucock2n', 3);
+insert into city (id, image_url, name, destination_id) values (97, 'Tin', 'jjaggar2o', 7);
+insert into city (id, image_url, name, destination_id) values (98, 'Sub-Ex', 'ljannings2p', 4);
+insert into city (id, image_url, name, destination_id) values (99, 'Tampflex', 'kcanter2q', 1);
+insert into city (id, image_url, name, destination_id) values (100, 'Zathin', 'fscreech2r', 7);
 
-INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
-        VALUES (1, 34, "Ajmo", "slika", false, "Grand Hotel", 1400, 1);
-INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
-        VALUES (2, 35, "Idemo", "slika1", true, "Ami Hotel", 400, 5);
-INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
-        VALUES (3, 13, "Najbolji", "slika2", false, "Prezident", 1900, 2);
-INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
-        VALUES (4, 34, "Ajmo", "slika", false, "Moskva", 1400, 3);
-INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
-        VALUES (5, 35, "Idemo", "slika1", true, "Suncica", 400, 2);
-INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
-        VALUES (6, 13, "Najbolji", "slika2", false, "Hacker Burger", 999, 1);
+--INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
+--        VALUES (1, 34, "Ajmo", "slika", false, "Grand Hotel", 1400, 1);
+--INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
+--        VALUES (2, 35, "Idemo", "slika1", true, "Ami Hotel", 400, 5);
+--INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
+--        VALUES (3, 13, "Najbolji", "slika2", false, "Prezident", 1900, 2);
+--INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
+--        VALUES (4, 34, "Ajmo", "slika", false, "Moskva", 1400, 3);
+--INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
+--        VALUES (5, 35, "Idemo", "slika1", true, "Suncica", 400, 2);
+--INSERT INTO hotel(`id`,`capacity`,`description`,`image_url`,`is_deleted`,`name`,`price_per_day`,`city_id`)
+--        VALUES (6, 13, "Najbolji", "slika2", false, "Hacker Burger", 999, 1);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (1, 72, 'Klocko Inc', 'rpetrillo0', 'Prodder', 8251, 63, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (2, 99, 'Stehr and Sons', 'fmclaggan1', 'Greenlam', 6351, 80, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (3, 73, 'Kuvalis and Sons', 'rthorington2', 'Flexidy', 2454, 11, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (4, 53, 'DuBuque Inc', 'wmcguffie3', 'Lotlux', 7542, 89, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (5, 53, 'Cronin, Boyle and Cartwright', 'gmalin4', 'Konklux', 9936, 57, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (6, 16, 'Bartoletti, Conn and Hermiston', 'fmacleod5', 'Sonsing', 8682, 27, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (7, 2, 'Braun, McCullough and Cremin', 'vleebeter6', 'Rank', 3994, 25, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (8, 38, 'Veum-Hermiston', 'lfurmedge7', 'Zoolab', 5884, 42, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (9, 27, 'Kutch Inc', 'sgrunder8', 'Treeflex', 7776, 44, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (10, 84, 'Oberbrunner-Crooks', 'vskipton9', 'Biodex', 3013, 33, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (11, 81, 'Veum-Yost', 'wcunda', 'Wrapsafe', 7553, 62, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (12, 28, 'Hermiston Inc', 'efidginb', 'It', 6362, 86, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (13, 73, 'Cartwright and Sons', 'msteddallc', 'Flexidy', 6357, 89, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (14, 65, 'Rosenbaum-Bayer', 'abischofd', 'Bamity', 8907, 39, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (15, 4, 'Heidenreich, McGlynn and Runolfsdottir', 'jbirkwoode', 'Zoolab', 7924, 68, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (16, 73, 'Lehner-White', 'btomalinf', 'Asoka', 4686, 94, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (17, 47, 'Wolf Inc', 'breinmarg', 'Temp', 9395, 55, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (18, 76, 'Hudson, Boyer and Ferry', 'tallotth', 'Zoolab', 9973, 24, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (19, 39, 'Kutch, Heaney and Dooley', 'flawrancei', 'Bamity', 3387, 69, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (20, 34, 'Howell and Sons', 'emeaj', 'Bamity', 1981, 64, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (21, 26, 'Gerhold Group', 'gsneydk', 'Alpha', 1584, 10, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (22, 39, 'Heathcote-Koepp', 'nboughtwoodl', 'Job', 2811, 38, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (23, 50, 'Koepp-Rodriguez', 'akuscham', 'Keylex', 1621, 34, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (24, 35, 'Altenwerth, Lynch and Hilpert', 'wthornleyn', 'Bigtax', 4960, 99, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (25, 63, 'Zemlak LLC', 'mselfo', 'Zontrax', 4386, 26, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (26, 18, 'Hyatt LLC', 'wmussettp', 'Alphazap', 4944, 56, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (27, 15, 'Adams-Green', 'mruprechterq', 'Regrant', 3869, 58, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (28, 15, 'Schmitt-Christiansen', 'afallowfieldr', 'Y-find', 6397, 65, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (29, 2, 'Bergstrom Group', 'ndomineys', 'Andalax', 9191, 90, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (30, 3, 'McKenzie-Jacobi', 'mkost', 'Ventosanzap', 8072, 39, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (31, 23, 'Bogan, Fadel and Schimmel', 'sbiggansu', 'Zoolab', 6891, 83, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (32, 71, 'Hoppe-Batz', 'fburganv', 'Otcom', 4906, 12, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (33, 7, 'Borer, Price and Tillman', 'ckloserw', 'Fix San', 4983, 49, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (34, 46, 'Hamill, Metz and Denesik', 'lbowlandsx', 'Tempsoft', 1261, 95, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (35, 58, 'Trantow Group', 'ariedely', 'Cardguard', 1905, 8, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (36, 72, 'Conroy-Hane', 'gtailourz', 'Cardify', 4122, 99, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (37, 25, 'Cronin-Rath', 'mmeriet10', 'Keylex', 5547, 47, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (38, 55, 'Kilback Inc', 'rrowlings11', 'Solarbreeze', 4478, 64, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (39, 51, 'Dickens-Tillman', 'mrasper12', 'Tempsoft', 7316, 4, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (40, 97, 'Boyer-Dooley', 'gmerriman13', 'Vagram', 6740, 94, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (41, 88, 'Dibbert, Bailey and VonRueden', 'messlemont14', 'Opela', 4765, 84, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (42, 48, 'Okuneva, Hayes and Fadel', 'scalderhead15', 'Overhold', 4818, 28, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (43, 84, 'Hahn LLC', 'jdutnall16', 'Tres-Zap', 2369, 92, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (44, 88, 'Carroll-Hauck', 'cwraggs17', 'Solarbreeze', 1001, 93, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (45, 72, 'Howe and Sons', 'qkuhnke18', 'Treeflex', 7359, 54, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (46, 55, 'Veum LLC', 'cgiorgietto19', 'Cookley', 7902, 85, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (47, 77, 'Dickens, Gleason and Lakin', 'afolca1a', 'Tres-Zap', 8109, 86, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (48, 36, 'Stehr and Sons', 'blow1b', 'Flowdesk', 3821, 82, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (49, 75, 'Krajcik, Predovic and Osinski', 'smagauran1c', 'Span', 6783, 41, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (50, 31, 'Wuckert, Cummings and Stracke', 'tmosson1d', 'Vagram', 8330, 28, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (51, 6, 'White, Lind and Schroeder', 'fblain1e', 'Job', 4628, 28, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (52, 2, 'Vandervort-Gutkowski', 'bthirlwell1f', 'Bytecard', 5908, 26, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (53, 18, 'Koss, Weimann and Sporer', 'erainy1g', 'Toughjoyfax', 3713, 15, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (54, 9, 'Williamson-Fisher', 'jwinney1h', 'Viva', 2919, 22, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (55, 93, 'Purdy and Sons', 'fphetteplace1i', 'Cardguard', 3146, 17, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (56, 17, 'Ferry Group', 'tboanas1j', 'Cardify', 7330, 98, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (57, 74, 'Block, Schoen and Krajcik', 'tdand1k', 'Flowdesk', 7621, 94, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (58, 72, 'Dickens, Sipes and Stamm', 'bdidball1l', 'Redhold', 9461, 2, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (59, 38, 'Sanford-Bode', 'ccaulkett1m', 'Cardguard', 4053, 25, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (60, 74, 'Kunde, Heller and Dickinson', 'nmilward1n', 'Tampflex', 8198, 43, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (61, 27, 'Ryan, Stoltenberg and Rogahn', 'srook1o', 'Veribet', 5188, 60, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (62, 11, 'Ebert-Bednar', 'scargo1p', 'Tin', 5946, 8, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (63, 31, 'Torphy, Hackett and Kunze', 'wtwinborne1q', 'Rank', 8556, 94, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (64, 73, 'Turner-Bernier', 'lmitchenson1r', 'Hatity', 8210, 71, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (65, 62, 'Sawayn, Hilll and Champlin', 'wmcinally1s', 'Prodder', 2934, 61, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (66, 20, 'Dooley, Jacobs and Pfannerstill', 'ablacker1t', 'Tin', 9281, 90, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (67, 43, 'Goodwin LLC', 'zbegley1u', 'Stronghold', 8828, 91, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (68, 70, 'Willms, Rice and Cremin', 'tgottschalk1v', 'Tin', 1345, 28, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (69, 67, 'Braun, Kuhic and Kemmer', 'aphythien1w', 'Temp', 8302, 54, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (70, 91, 'Bogisich and Sons', 'fflucker1x', 'Viva', 9812, 48, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (71, 11, 'Crist-Gorczany', 'drelton1y', 'Andalax', 6322, 89, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (72, 59, 'Stanton-Schmeler', 'schevolleau1z', 'Transcof', 8802, 23, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (73, 94, 'Gulgowski Group', 'gstanlike20', 'Flowdesk', 3658, 67, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (74, 13, 'DuBuque-Paucek', 'eoshevlin21', 'Span', 8905, 36, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (75, 61, 'Hoppe, Glover and Huel', 'oebbing22', 'Temp', 8023, 99, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (76, 24, 'Parker-Rath', 'dadamiec23', 'Stringtough', 8382, 79, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (77, 98, 'Price and Sons', 'hbullas24', 'Quo Lux', 7932, 69, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (78, 90, 'Wiegand, Jast and Lueilwitz', 'afischer25', 'Aerified', 9539, 89, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (79, 41, 'Murazik, Mante and Watsica', 'gparramore26', 'Sonsing', 5671, 12, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (80, 33, 'Deckow, Champlin and Adams', 'adobkin27', 'Kanlam', 2328, 6, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (81, 70, 'Nikolaus-Friesen', 'kkindleside28', 'Voyatouch', 2716, 24, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (82, 74, 'Schinner, Okuneva and Mitchell', 'mmulhill29', 'Y-Solowarm', 4560, 33, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (83, 66, 'Zemlak, Shanahan and White', 'flightfoot2a', 'Sub-Ex', 2502, 65, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (84, 63, 'Nikolaus, Schmitt and Swaniawski', 'btesoe2b', 'Daltfresh', 9071, 25, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (85, 14, 'Connelly, Spinka and Collins', 'bkiggel2c', 'Redhold', 4457, 12, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (86, 23, 'Hagenes, Heidenreich and Stehr', 'joneile2d', 'Stim', 9654, 59, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (87, 92, 'Johnston, Herman and Swaniawski', 'ahodge2e', 'Domainer', 1279, 39, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (88, 97, 'Waelchi-Spencer', 'rfaulconer2f', 'Toughjoyfax', 4853, 58, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (89, 75, 'Wunsch-Ondricka', 'espringall2g', 'Ventosanzap', 6998, 57, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (90, 100, 'Greenfelder-Kulas', 'mduester2h', 'Konklab', 4296, 9, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (91, 12, 'Will and Sons', 'fkeyho2i', 'Tempsoft', 6748, 45, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (92, 51, 'McDermott Inc', 'rtarbett2j', 'Latlux', 7668, 71, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (93, 90, 'Lang-Hudson', 'rcostigan2k', 'Solarbreeze', 4968, 59, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (94, 5, 'Durgan-Kozey', 'fiban2l', 'Redhold', 5632, 46, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (95, 33, 'Gorczany-Olson', 'tfakes2m', 'Latlux', 3185, 97, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (96, 26, 'Dibbert-Spinka', 'cdabes2n', 'Tres-Zap', 4121, 99, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (97, 17, 'Hammes, Langworth and Fay', 'jsodory2o', 'Keylex', 6627, 30, true);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (98, 23, 'Rohan, Smith and Bruen', 'gmanford2p', 'Trippledex', 2480, 29, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (99, 41, 'Jerde Inc', 'dlemarchand2q', 'Tin', 2336, 3, false);
+insert into hotel (id, capacity, description, image_url, name, price_per_day, city_id, is_deleted) values (100, 55, 'Dicki-Bahringer', 'tshirtliff2r', 'Greenlam', 3372, 53, false);

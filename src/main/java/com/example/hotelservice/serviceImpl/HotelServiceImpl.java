@@ -26,7 +26,7 @@ public class HotelServiceImpl implements HotelService {
         Optional<Hotel> hotel = hotelRepository.findById(id);
         if(hotel.isPresent())
             return new ResponseEntity<>(hotel.get().getCapacity(), HttpStatus.OK);
-        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -35,9 +35,11 @@ public class HotelServiceImpl implements HotelService {
         Long numberOfDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
         Optional<Hotel> hotel = hotelRepository.findById(resDto.getHotelId());
-        if(hotel.isPresent())
-            return new ResponseEntity<>(Math.toIntExact(numberOfDays) * hotel.get().getPricePerDay() * resDto.getGuestNumber(), HttpStatus.OK);
-        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if(hotel.isPresent()) {
+            Integer calculatedPrice = Math.toIntExact(numberOfDays) * hotel.get().getPricePerDay() * resDto.getGuestNumber();
+            return new ResponseEntity<>(calculatedPrice, HttpStatus.OK);
+        }
+        return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override

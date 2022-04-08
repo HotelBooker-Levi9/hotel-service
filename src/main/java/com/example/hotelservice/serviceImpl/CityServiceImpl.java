@@ -1,26 +1,18 @@
 package com.example.hotelservice.serviceImpl;
-
-
-
 import com.example.hotelservice.mapper.CityAdapter;
-import com.example.hotelservice.mapper.DestinationAdapter;
 import com.example.hotelservice.model.City;
-import com.example.hotelservice.model.Destination;
 import com.example.hotelservice.model.Hotel;
 import com.example.hotelservice.model.dto.CityDTO;
 import com.example.hotelservice.repository.CityRepository;
 import com.example.hotelservice.repository.DestinationRepository;
 import com.example.hotelservice.repository.HotelRepository;
+import com.example.hotelservice.service.CRUDService;
 import com.example.hotelservice.service.CityService;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import javax.persistence.NoResultException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class CityServiceImpl implements CityService {
+public class CityServiceImpl implements CRUDService {
 
     @Autowired
     private CityRepository cityRepository;
@@ -37,6 +29,8 @@ public class CityServiceImpl implements CityService {
     private DestinationRepository destinationRepository;
     @Autowired
     private HotelRepository hotelRepository;
+    
+    @Transactional
 	@Override
 	public ResponseEntity<?> addCity(CityDTO cityDTO) {
 		try {
@@ -59,7 +53,7 @@ public class CityServiceImpl implements CityService {
 	}
 	@Transactional
 	@Override
-	public ResponseEntity<?> removeCity(Long id, boolean delete) {
+	public ResponseEntity<?> remove(Long id, boolean delete) {
 		try {
 		City city=cityRepository.findById(id).get();
 		List<Hotel> hotelsForCity= hotelRepository.findAllHotelsForCity(id);
@@ -105,30 +99,31 @@ public class CityServiceImpl implements CityService {
 		
 	}
 	@Override
-	public ResponseEntity<CityDTO> findOne(Long id) {
+	public ResponseEntity<?> findOne(Long id) {
 		try {
 			CityDTO city=CityAdapter.convertToDTO(cityRepository.findById(id).get());
 			return new ResponseEntity<CityDTO>(city,HttpStatus.OK);
 		}catch(NoResultException ex) {
 			System.out.println(ex.getMessage());
 		}
-		return null;
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
 	}
-	public ResponseEntity<List<CityDTO>> findAll(){
+	public ResponseEntity<?> findAll(){
 		try {
 			List<CityDTO> cities=CityAdapter.convertListToDTO(cityRepository.findAll());
 			
-			return new ResponseEntity<List<CityDTO>>(cities,HttpStatus.OK);
+			return new ResponseEntity<>(cities,HttpStatus.OK);
 		}catch(NoResultException ex) {
 			System.out.println(ex.getMessage());
 		}
-		return null;
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
 		
 	}
+	@Transactional
 	@Override
-	public ResponseEntity<?> updateCity(CityDTO cityDTO) {
+	public ResponseEntity<?> update(CityDTO cityDTO) {
 		try {
 			City res = CityAdapter.convertDto(cityDTO);
 			City city=cityRepository.findById(res.getId()).get();
@@ -146,7 +141,16 @@ public class CityServiceImpl implements CityService {
 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
-	
+	@Override
+	public ResponseEntity<?> add(Object newObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ResponseEntity<?> update(Object newObject) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 	
    

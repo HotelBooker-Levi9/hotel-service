@@ -13,7 +13,7 @@ public interface HotelService {
 	 ResponseEntity<?> addHotel(HotelDTO hotelDTO);
 	 ResponseEntity<?> updateHotel(HotelDTO hotelDTO);
 	 ResponseEntity<?> removeHotel(Long hotelId);
-	 ResponseEntity<HotelDTO> findOne(Long hotelId);
-	 ResponseEntity<List<HotelDTO>> findAll();
+	 ResponseEntity<?> findOne(Long hotelId);
+	 ResponseEntity<?> findAll();
 	 
 }

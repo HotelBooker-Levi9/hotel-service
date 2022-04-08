@@ -52,13 +52,13 @@ public class CityController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<CityDTO> getCityById(@PathVariable Long id) {
+	public ResponseEntity<?> getCityById(@PathVariable Long id) {
 		
 		return cityService.findOne(id);
 	}
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-	public ResponseEntity<List<CityDTO>> getAllCities() {
+	public ResponseEntity<?> getAllCities() {
 		
 		return cityService.findAll();
 	}

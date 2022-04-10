@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -24,9 +27,9 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public ResponseEntity<?> getCapacityForHotelId(Long id) {
         Optional<Hotel> hotel = hotelRepository.findById(id);
-        if(hotel.isPresent())
+        if (hotel.isPresent())
             return new ResponseEntity<>(hotel.get().getCapacity(), HttpStatus.OK);
-        return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -35,11 +38,11 @@ public class HotelServiceImpl implements HotelService {
         Long numberOfDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
         Optional<Hotel> hotel = hotelRepository.findById(resDto.getHotelId());
-        if(hotel.isPresent()) {
+        if (hotel.isPresent()) {
             Integer calculatedPrice = Math.toIntExact(numberOfDays) * hotel.get().getPricePerDay() * resDto.getGuestNumber();
             return new ResponseEntity<>(calculatedPrice, HttpStatus.OK);
         }
-        return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -60,6 +63,35 @@ public class HotelServiceImpl implements HotelService {
                     searchDto.getHotelName(), searchDto.getPricePerDay(), searchDto.getCityName(), searchDto.getDestinationName(), unavailableHotels, searchDto.getGuestNum()));
 
         return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
+    }
+
+    @Override
+    public ResponseEntity<?> searchParams(String hotelName, Integer pricePerDay, String cityName, String destinationName, String checkInDate,
+                                          String checkOutDate, Integer guestNum) throws ParseException {
+        List<Arrangement> arrangements = new ArrayList<>();
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            List<Long> unavailableHotels = new ArrayList<>();
+
+            if (checkInDate.equals("") && checkOutDate.equals("")) {
+                Date checkIn = formatter.parse(checkInDate);
+                Date checkOut = formatter.parse(checkOutDate);
+                unavailableHotels = Arrays.asList(getUnavailableHotelIdsForDateRange(checkIn, checkOut, guestNum));
+            }
+
+            if (unavailableHotels.isEmpty()) {
+                arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResultsWhenDontHaveUnavailable(
+                        hotelName, pricePerDay, cityName, destinationName, guestNum));
+            } else {
+                arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResults(
+                        hotelName, pricePerDay, cityName, destinationName, unavailableHotels, guestNum));
+            }
+
+            return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(arrangements, HttpStatus.NOT_FOUND);
     }
 
     @Override

@@ -28,7 +28,6 @@ import com.example.hotelservice.dto.*;
 import com.example.hotelservice.mapper.ArrangementAdapter;
 import com.example.hotelservice.model.Hotel;
 import com.example.hotelservice.repository.HotelRepository;
-import com.example.hotelservice.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -155,7 +154,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 	public ResponseEntity<?> remove(Long id, boolean deleted) {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
-    @Override
+    
     public ResponseEntity<?> getCapacityForHotelId(Long id) {
         Optional<Hotel> hotel = hotelRepository.findById(id);
         if(hotel.isPresent())
@@ -163,7 +162,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @Override
+    
     public ResponseEntity<?> calculatePriceForReservation(ReservationDTO resDto) {
         Long diffInMillies = Math.abs(resDto.getCheckOutDate().getTime() - resDto.getCheckInDate().getTime());
         Long numberOfDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -176,12 +175,12 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @Override
+    
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findAllByIsDeleted(false)), HttpStatus.OK);
     }
 
-    @Override
+    
     public ResponseEntity<?> search(SearchDTO searchDto) {
         List<Long> unavailableHotels = Arrays.asList(getUnavailableHotelIdsForDateRange(searchDto.getCheckInDate(), searchDto.getCheckOutDate(), searchDto.getGuestNum()));
         List<Arrangement> arrangements;
@@ -196,7 +195,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
     }
 
-    @Override
+    
     public ResponseEntity<?> top10() {
         List<Arrangement> top10 = new ArrayList<>();
         int i = 0;

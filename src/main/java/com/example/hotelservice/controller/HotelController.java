@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.hotelservice.dto.ReservationDTO;
 import com.example.hotelservice.dto.SearchDTO;
-import com.example.hotelservice.service.CityService;
-import com.example.hotelservice.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

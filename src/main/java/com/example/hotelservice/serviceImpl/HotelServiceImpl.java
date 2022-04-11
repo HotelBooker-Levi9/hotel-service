@@ -7,7 +7,7 @@ import com.example.hotelservice.model.Hotel;
 import com.example.hotelservice.model.dto.HotelDTO;
 import com.example.hotelservice.repository.CityRepository;
 import com.example.hotelservice.repository.HotelRepository;
-import com.example.hotelservice.service.HotelService;
+import com.example.hotelservice.service.CRUDService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,17 +24,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class HotelServiceImpl implements HotelService {
+public class HotelServiceImpl implements CRUDService<HotelDTO> {
 
     @Autowired
     private HotelRepository hotelRepository;
 
     @Autowired
     private CityRepository cityRepository;
+    public static final String RESERVATIONS="http://localhost:8765/reservations/reservationInFuture/";
 
 	@Override
 	@Transactional
-	public ResponseEntity<?> addHotel(HotelDTO hotelDTO) {
+	public ResponseEntity<?> add(HotelDTO hotelDTO) {
 		try {
 			Hotel res = HotelAdapter.convertDto(hotelDTO);
 
@@ -58,7 +59,7 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<?> updateHotel(HotelDTO hotelDTO) {
+	public ResponseEntity<?> update(HotelDTO hotelDTO) {
 		try {
 			Hotel res = HotelAdapter.convertDto(hotelDTO);
 			Hotel hotel = hotelRepository.findById(res.getId()).get();
@@ -80,7 +81,7 @@ public class HotelServiceImpl implements HotelService {
 
 	@Transactional
 	@Override
-	public ResponseEntity<?> removeHotel(Long hotelId) {
+	public ResponseEntity<?> remove(Long hotelId) {
 		try {
 			Hotel hotel = hotelRepository.findById(hotelId).get();
 
@@ -89,8 +90,7 @@ public class HotelServiceImpl implements HotelService {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<Boolean> reserved = restTemplate
-					.getForEntity("http://localhost:8100/reservations/reservationInFuture/"
-							+ simpleDateFormat.format(dateNow) + "/" + hotelId, Boolean.class);
+					.getForEntity(RESERVATIONS+ simpleDateFormat.format(dateNow) + "/" + hotelId, Boolean.class);
 
 			if (reserved.getBody().equals(true)) {
 
@@ -125,11 +125,17 @@ public class HotelServiceImpl implements HotelService {
 		try {
 			List<HotelDTO> hotels = HotelAdapter.convertListToDTO(hotelRepository.findAll());
 
-			return new ResponseEntity<>(hotels, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (NoResultException ex) {
 			System.out.println(ex.getMessage());
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
 
+	}
+
+	@Override
+	public ResponseEntity<?> remove(Long id, boolean deleted) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

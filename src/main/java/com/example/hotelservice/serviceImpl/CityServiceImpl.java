@@ -7,11 +7,12 @@ import com.example.hotelservice.repository.CityRepository;
 import com.example.hotelservice.repository.DestinationRepository;
 import com.example.hotelservice.repository.HotelRepository;
 import com.example.hotelservice.service.CRUDService;
-import com.example.hotelservice.service.CityService;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class CityServiceImpl implements CRUDService {
+public class CityServiceImpl implements CRUDService<CityDTO> {
 
     @Autowired
     private CityRepository cityRepository;
@@ -32,7 +33,7 @@ public class CityServiceImpl implements CRUDService {
     
     @Transactional
 	@Override
-	public ResponseEntity<?> addCity(CityDTO cityDTO) {
+	public ResponseEntity<?> add(CityDTO cityDTO) {
 		try {
 			City res = CityAdapter.convertDto(cityDTO);
 		       
@@ -109,6 +110,7 @@ public class CityServiceImpl implements CRUDService {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
 	}
+	@Override
 	public ResponseEntity<?> findAll(){
 		try {
 			List<CityDTO> cities=CityAdapter.convertListToDTO(cityRepository.findAll());
@@ -118,7 +120,7 @@ public class CityServiceImpl implements CRUDService {
 			System.out.println(ex.getMessage());
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		
+	
 		
 	}
 	@Transactional
@@ -142,16 +144,11 @@ public class CityServiceImpl implements CRUDService {
 
 	}
 	@Override
-	public ResponseEntity<?> add(Object newObject) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<?> remove(Long id) {
 		return null;
 	}
-	@Override
-	public ResponseEntity<?> update(Object newObject) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-		
+
+	
 	
    
 }

@@ -17,46 +17,46 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hotelservice.model.dto.CityDTO;
 import com.example.hotelservice.model.dto.DestinationDTO;
-import com.example.hotelservice.service.DestinationService;
+import com.example.hotelservice.serviceImpl.DestinationServiceImpl;
 
 @RestController
 @RequestMapping(value = "/destinations")
 public class DestinationController {
 
-    @Autowired
-    private DestinationService destinationService;
-  
-    
-    @PostMapping("/addDestination")
-    public ResponseEntity<?> addDestination(@RequestBody DestinationDTO destinationDTO) {
-          destinationService.addDestination(destinationDTO);
-          return new ResponseEntity<>(HttpStatus.OK);
-        
-    }
-    @PutMapping
-    public ResponseEntity<?> updateDestination(@RequestBody DestinationDTO destinationDTO) {
-          destinationService.updateDestination(destinationDTO);
-          return new ResponseEntity<>(HttpStatus.OK);
-        
-    }
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-   	public ResponseEntity<DestinationDTO> getDestinationById(@PathVariable Long id) {
-   		
-   		return destinationService.findOne(id);
-   	}
+	@Autowired
+	private DestinationServiceImpl destinationService;
 
-       @RequestMapping(value = "/", method = RequestMethod.GET)
-   	public ResponseEntity<List<DestinationDTO>> getAllDestinations() {
-   		
-   		return destinationService.findAll();
-   	}
-       
-       @PutMapping(value="/{id}")
-       public ResponseEntity<Void> deleteDestination(@PathVariable Long id) {
-    	   destinationService.removeDestination(id);
-           return new ResponseEntity<>(HttpStatus.OK);
-             
-          
-       }
+	@PostMapping("/addDestination")
+	public ResponseEntity<?> addDestination(@RequestBody DestinationDTO destinationDTO) {
+		destinationService.add(destinationDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
+
+	@PutMapping
+	public ResponseEntity<?> updateDestination(@RequestBody DestinationDTO destinationDTO) {
+		destinationService.update(destinationDTO);
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getDestinationById(@PathVariable Long id) {
+
+		return destinationService.findOne(id);
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ResponseEntity<?> getAllDestinations() {
+
+		return destinationService.findAll();
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteDestination(@PathVariable Long id) {
+		destinationService.remove(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
 
 }

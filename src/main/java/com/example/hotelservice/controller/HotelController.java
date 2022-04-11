@@ -52,7 +52,7 @@ public class HotelController {
                                               @RequestParam(name = "checkOutDate") String checkOutDate,
                                               @RequestParam(name = "guestNum") Integer guestNum) throws ParseException {
                 return hotelService.searchParams(hotelName, pricePerDay, cityName, destinationName, checkInDate,
-                                                checkOutDate, guestNum);
+                                checkOutDate, guestNum);
         }
 
         @GetMapping("/top10")

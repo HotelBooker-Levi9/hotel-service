@@ -73,7 +73,7 @@ public class HotelServiceImpl implements HotelService {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             List<Long> unavailableHotels = new ArrayList<>();
 
-            if (checkInDate.equals("") && checkOutDate.equals("")) {
+            if (!checkInDate.equals("") && !checkOutDate.equals("")) {
                 Date checkIn = formatter.parse(checkInDate);
                 Date checkOut = formatter.parse(checkOutDate);
                 unavailableHotels = Arrays.asList(getUnavailableHotelIdsForDateRange(checkIn, checkOut, guestNum));
@@ -87,7 +87,7 @@ public class HotelServiceImpl implements HotelService {
                         hotelName, pricePerDay, cityName, destinationName, unavailableHotels, guestNum));
             }
 
-            return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
+            return new ResponseEntity<>(arrangements, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -11,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-
 public class DestinationDTO {
 	
 	private Long id;

@@ -28,15 +28,15 @@ public class DestinationController {
 
 	@PostMapping("/addDestination")
 	public ResponseEntity<?> addDestination(@RequestBody DestinationDTO destinationDTO) {
-		destinationService.add(destinationDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return destinationService.add(destinationDTO);
+		
 
 	}
 
 	@PutMapping
 	public ResponseEntity<?> updateDestination(@RequestBody DestinationDTO destinationDTO) {
-		destinationService.update(destinationDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return destinationService.update(destinationDTO);
+		
 
 	}
 
@@ -53,9 +53,9 @@ public class DestinationController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> deleteDestination(@PathVariable Long id) {
-		destinationService.remove(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<?> deleteDestination(@PathVariable Long id) {
+		return destinationService.remove(id);
+		
 
 	}
 

@@ -16,7 +16,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,8 +31,10 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 
     @Autowired
     private CityRepository cityRepository;
-    public static final String RESERVATIONS="http://localhost:8765/reservations/reservationInFuture/";
-
+    
+    @Value("${reservations}")
+    private String reservations;
+   
 	@Override
 	@Transactional
 	public ResponseEntity<?> add(HotelDTO hotelDTO) {
@@ -90,7 +92,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 			RestTemplate restTemplate = new RestTemplate();
 			ResponseEntity<Boolean> reserved = restTemplate
-					.getForEntity(RESERVATIONS+ simpleDateFormat.format(dateNow) + "/" + hotelId, Boolean.class);
+					.getForEntity(reservations+ simpleDateFormat.format(dateNow) + "/" + hotelId, Boolean.class);
 
 			if (reserved.getBody().equals(true)) {
 
@@ -107,7 +109,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	public ResponseEntity<?> findOne(Long id) {
@@ -125,7 +127,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 		try {
 			List<HotelDTO> hotels = HotelAdapter.convertListToDTO(hotelRepository.findAll());
 
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(hotels,HttpStatus.OK);
 		} catch (NoResultException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -135,7 +137,6 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 
 	@Override
 	public ResponseEntity<?> remove(Long id, boolean deleted) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 }

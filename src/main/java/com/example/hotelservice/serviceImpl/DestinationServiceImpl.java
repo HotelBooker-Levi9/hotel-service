@@ -130,8 +130,7 @@ public class DestinationServiceImpl implements CRUDService<DestinationDTO> {
 
 	@Override
 	public ResponseEntity<?> remove(Long id, boolean deleted) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
 }

@@ -24,23 +24,23 @@ public class CityController {
 	private CityServiceImpl cityService;
 
 	@PostMapping("/addCity")
-	public void addCity(@RequestBody CityDTO cityDTO) {
-		cityService.add(cityDTO);
+	public ResponseEntity<?> addCity(@RequestBody CityDTO cityDTO) {
+		return cityService.add(cityDTO);
 
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> deleteCity(@PathVariable Long id) {
+	public ResponseEntity<?> deleteCity(@PathVariable Long id) {
 
-		cityService.remove(id, true);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return cityService.remove(id, true);
+		
 	}
 
 	@PutMapping
-	public ResponseEntity<Void> updateCity(@RequestBody CityDTO cityDTO) {
+	public ResponseEntity<?> updateCity(@RequestBody CityDTO cityDTO) {
 
-		cityService.update(cityDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return cityService.update(cityDTO);
+		
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

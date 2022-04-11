@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class CityServiceImpl implements CRUDService<CityDTO> {
     private DestinationRepository destinationRepository;
     @Autowired
     private HotelRepository hotelRepository;
+    
+    @Value("${reservations}")
+    private String reservations;
     
     @Transactional
 	@Override
@@ -65,7 +69,7 @@ public class CityServiceImpl implements CRUDService<CityDTO> {
 	        	String pattern = "yyyy-MM-dd";
 	        	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 	            RestTemplate restTemplate = new RestTemplate();
-	            ResponseEntity<Boolean> reserved = restTemplate.getForEntity( "http://localhost:8100/reservations/reservationInFuture/" + simpleDateFormat.format(dateNow) +"/"+ hotel.getId(), Boolean.class);
+	            ResponseEntity<Boolean> reserved = restTemplate.getForEntity( reservations + simpleDateFormat.format(dateNow) +"/"+ hotel.getId(), Boolean.class);
 	            if(reserved.getBody().equals(true)) {
 	            		
 	    				noReservation.add(hotel);
@@ -128,24 +132,24 @@ public class CityServiceImpl implements CRUDService<CityDTO> {
 	public ResponseEntity<?> update(CityDTO cityDTO) {
 		try {
 			City res = CityAdapter.convertDto(cityDTO);
-			City city=cityRepository.findById(res.getId()).get();
+			City city = cityRepository.findById(res.getId()).get();
 			city.setName(cityDTO.getName());
 			city.setImageUrl(cityDTO.getImageUrl());
-			
+
 			city.setIsDeleted(cityDTO.getIsDeleted());
 			city.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
-	         cityRepository.save(city);
-	        return new ResponseEntity<>(HttpStatus.OK);
+			cityRepository.save(city);
+			return new ResponseEntity<>(HttpStatus.OK);
 
-	}catch(Exception ex) {
-		ex.getMessage();
-	}
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
 	@Override
 	public ResponseEntity<?> remove(Long id) {
-		return null;
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
 	

@@ -24,23 +24,23 @@ public class HotelController {
 
 	@PostMapping("/addHotel")
 	public ResponseEntity<?> addHotel(@RequestBody HotelDTO hotelDTO) {
-		hotelService.add(hotelDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return hotelService.add(hotelDTO);
+		
 
 	}
 
 	@PutMapping
-	public ResponseEntity<Void> updateHotel(@RequestBody HotelDTO hotelDTO) {
+	public ResponseEntity<?> updateHotel(@RequestBody HotelDTO hotelDTO) {
 
-		hotelService.update(hotelDTO);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return hotelService.update(hotelDTO);
+		
 	}
 
 	@PutMapping(value = "/{hotelId}")
-	public ResponseEntity<Void> deleteHotel(@PathVariable Long hotelId) {
+	public ResponseEntity<?> deleteHotel(@PathVariable Long hotelId) {
 
-		hotelService.remove(hotelId);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return hotelService.remove(hotelId);
+		
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -31,8 +31,6 @@ public class HotelController {
 	@PostMapping("/addHotel")
 	public ResponseEntity<?> addHotel(@RequestBody HotelDTO hotelDTO) {
 		return hotelService.add(hotelDTO);
-		
-
 	}
 
 	@PutMapping

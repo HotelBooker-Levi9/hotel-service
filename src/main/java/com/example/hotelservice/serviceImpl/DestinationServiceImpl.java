@@ -100,25 +100,19 @@ public class DestinationServiceImpl implements CRUDService<DestinationDTO> {
 			List<City> noReservation = new ArrayList<>();
 
 			if (!cities.isEmpty()) {
-				for (City city : cities) {
-					if (cityService.remove(city.getId(), false).getStatusCode() == HttpStatus.OK) {
-
+				for (City city : cities)
+					if (cityService.remove(city.getId(), false).getStatusCode() == HttpStatus.OK)
 						noReservation.add(city);
-					}
-				}
 				if (noReservation.equals(cities)) {
-					for (City city : cities) {
+					for (City city : cities)
 						cityService.remove(city.getId(), true);
-					}
 					destination.setIsDeleted(true);
-
 					return new ResponseEntity<>(HttpStatus.OK);
 				}
-
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-			destination.setIsDeleted(true);
 
+			destination.setIsDeleted(true);
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (Exception ex) {

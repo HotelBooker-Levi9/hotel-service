@@ -33,36 +33,30 @@ public class HotelController {
 		return hotelService.add(hotelDTO);
 	}
 
-	@PutMapping
+	@PutMapping("/")
 	public ResponseEntity<?> updateHotel(@RequestBody HotelDTO hotelDTO) {
-
 		return hotelService.update(hotelDTO);
-		
 	}
 
 	@PutMapping(value = "/{hotelId}")
 	public ResponseEntity<?> deleteHotel(@PathVariable Long hotelId) {
-
 		return hotelService.remove(hotelId);
-		
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getHotelById(@PathVariable Long id) {
-
 		return hotelService.findOne(id);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllHotels() {
-
 		return hotelService.findAll();
 	}
-	
-	 @GetMapping("/capacityForHotel/{id}")
-        public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
-                return hotelService.getCapacityForHotelId(id);
-        }
+
+	@GetMapping("/capacityForHotel/{id}")
+	public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
+		return hotelService.getCapacityForHotelId(id);
+	}
 
         @PostMapping("/priceForReservation")
         public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
@@ -79,10 +73,10 @@ public class HotelController {
                 return hotelService.search(searchDto);
         }
 
-        @GetMapping("/top10")
+		@GetMapping("/top10")
         public ResponseEntity<?> top10() {
                 return hotelService.top10();
         }
 
 
-       }
+}

@@ -5,6 +5,7 @@ import com.example.hotelservice.model.dto.CityDTO;
 import com.example.hotelservice.serviceImpl.CityServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/cities")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CityController {
 
 	@Autowired

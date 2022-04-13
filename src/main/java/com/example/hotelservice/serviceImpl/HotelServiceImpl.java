@@ -54,7 +54,6 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
     private String reservations;
    
 	@Override
-	@Transactional
 	public ResponseEntity<?> add(HotelDTO hotelDTO) {
 		try {
 			Hotel res = HotelAdapter.convertDto(hotelDTO);
@@ -198,7 +197,6 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
     }
 
-    @Override
     public ResponseEntity<?> searchParams(String hotelName, Integer pricePerDay, String cityName, String destinationName, String checkInDate,
                                           String checkOutDate, Integer guestNum) throws ParseException {
         List<Arrangement> arrangements = new ArrayList<>();
@@ -227,7 +225,6 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         return new ResponseEntity<>(arrangements, HttpStatus.NOT_FOUND);
     }
 
-    @Override
     
     public ResponseEntity<?> top10() {
         List<Arrangement> top10 = new ArrayList<>();

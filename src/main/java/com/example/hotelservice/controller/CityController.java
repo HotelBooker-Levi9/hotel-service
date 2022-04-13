@@ -28,26 +28,20 @@ public class CityController {
 	@PostMapping("/addCity")
 	public ResponseEntity<?> addCity(@RequestBody CityDTO cityDTO) {
 		return cityService.add(cityDTO);
-
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> deleteCity(@PathVariable Long id) {
-
 		return cityService.remove(id, true);
-		
 	}
 
 	@PutMapping
 	public ResponseEntity<?> updateCity(@RequestBody CityDTO cityDTO) {
-
 		return cityService.update(cityDTO);
-		
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCityById(@PathVariable Long id) {
-
 		return cityService.findOne(id);
 	}
 

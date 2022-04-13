@@ -23,7 +23,6 @@ import com.example.hotelservice.serviceImpl.DestinationServiceImpl;
 
 @RestController
 @RequestMapping(value = "/destinations")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DestinationController {
 
 	@Autowired
@@ -32,34 +31,26 @@ public class DestinationController {
 	@PostMapping("/addDestination")
 	public ResponseEntity<?> addDestination(@RequestBody DestinationDTO destinationDTO) {
 		return destinationService.add(destinationDTO);
-		
-
 	}
 
 	@PutMapping
 	public ResponseEntity<?> updateDestination(@RequestBody DestinationDTO destinationDTO) {
 		return destinationService.update(destinationDTO);
-		
-
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getDestinationById(@PathVariable Long id) {
-
 		return destinationService.findOne(id);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllDestinations() {
-
 		return destinationService.findAll();
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> deleteDestination(@PathVariable Long id) {
 		return destinationService.remove(id);
-		
-
 	}
 
 }

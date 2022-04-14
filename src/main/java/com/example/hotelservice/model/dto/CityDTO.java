@@ -18,9 +18,5 @@ public class CityDTO {
 	private String imageUrl;
 	private Boolean isDeleted;
 	private DestinationDTO destinationDTO;
-	
 
-	
-	
-	
 }

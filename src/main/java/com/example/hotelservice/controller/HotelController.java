@@ -38,7 +38,7 @@ public class HotelController {
 		return hotelService.add(hotelDTO);
 	}
 
-	@PutMapping
+	@PutMapping("/")
 	public ResponseEntity<?> updateHotel(@RequestBody HotelDTO hotelDTO) {
 		return hotelService.update(hotelDTO);
 	}
@@ -95,5 +95,6 @@ public class HotelController {
     public ResponseEntity<?> top10() {
         return hotelService.top10();
     }
+
         
 }

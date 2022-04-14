@@ -31,7 +31,7 @@ public class CityController {
 
 	}
 
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/deleteCity/{id}")
 	public ResponseEntity<?> deleteCity(@PathVariable Long id) {
 
 		return cityService.remove(id, true);

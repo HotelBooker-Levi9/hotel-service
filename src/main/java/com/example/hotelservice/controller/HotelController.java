@@ -48,7 +48,7 @@ public class HotelController {
 		
 	}
 
-	@PutMapping(value = "/{hotelId}")
+	@PutMapping(value = "/deleteHotel/{hotelId}")
 	public ResponseEntity<?> deleteHotel(@PathVariable Long hotelId) {
 
 		return hotelService.remove(hotelId);

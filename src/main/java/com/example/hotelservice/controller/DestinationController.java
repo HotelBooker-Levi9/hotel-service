@@ -55,7 +55,7 @@ public class DestinationController {
 		return destinationService.findAll();
 	}
 
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/deleteDestination/{id}")
 	public ResponseEntity<?> deleteDestination(@PathVariable Long id) {
 		return destinationService.remove(id);
 		

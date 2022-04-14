@@ -38,68 +38,69 @@ public class HotelController {
 		return hotelService.add(hotelDTO);
 	}
 
-	@PutMapping
+	@PutMapping("/")
 	public ResponseEntity<?> updateHotel(@RequestBody HotelDTO hotelDTO) {
-
 		return hotelService.update(hotelDTO);
-		
 	}
 
 	@PutMapping(value = "/{hotelId}")
 	public ResponseEntity<?> deleteHotel(@PathVariable Long hotelId) {
-
 		return hotelService.remove(hotelId);
-		
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getHotelById(@PathVariable Long id) {
-
 		return hotelService.findOne(id);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllHotels() {
-
 		return hotelService.findAll();
 	}
-	
-	 @GetMapping("/capacityForHotel/{id}")
-        public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
-                return hotelService.getCapacityForHotelId(id);
-        }
 
-        @PostMapping("/priceForReservation")
-        public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
-                return hotelService.calculatePriceForReservation(resDto);
-        }
+	@GetMapping("/capacityForHotel/{id}")
+	public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
+		return hotelService.getCapacityForHotelId(id);
+	}
 
-        @GetMapping("/all")
-        public ResponseEntity<?> getAll() {
-                return hotelService.getAll();
-        }
+  @PostMapping("/priceForReservation")
+  public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
+          return hotelService.calculatePriceForReservation(resDto);
+  }
 
-        //POST??
-        @PostMapping("/search")
-        public ResponseEntity<?> search(@RequestBody SearchDTO searchDto) {
-                return hotelService.search(searchDto);
-        }
+  @GetMapping("/all")
+  public ResponseEntity<?> getAll() {
+          return hotelService.getAll();
+  }
 
-        @GetMapping("/searchParams")
-        public ResponseEntity<?> searchParams(@RequestParam(name = "hotelName") String hotelName,
-                                              @RequestParam(name = "pricePerDay") Integer pricePerDay,
-                                              @RequestParam(name = "cityName") String cityName,
-                                              @RequestParam(name = "destinationName") String destinationName,
-                                              @RequestParam(name = "checkInDate") String checkInDate,
-                                              @RequestParam(name = "checkOutDate") String checkOutDate,
-                                              @RequestParam(name = "guestNum") Integer guestNum) throws ParseException {
-                return hotelService.searchParams(hotelName, pricePerDay, cityName, destinationName, checkInDate,
-                                checkOutDate, guestNum);
-        }
+  //POST??
+  @PostMapping("/search")
+  public ResponseEntity<?> search(@RequestBody SearchDTO searchDto) {
+          return hotelService.search(searchDto);
+  }
 
-        @GetMapping("/top10")
-        public ResponseEntity<?> top10() {
-                return hotelService.top10();
-        }
+
+@GetMapping("/top10")
+  public ResponseEntity<?> top10() {
+          return hotelService.top10();
+  }
+
+
+  @GetMapping("/searchParams")
+  public ResponseEntity<?> searchParams(@RequestParam(name = "hotelName") String hotelName,
+                                        @RequestParam(name = "pricePerDay") Integer pricePerDay,
+                                        @RequestParam(name = "cityName") String cityName,
+                                        @RequestParam(name = "destinationName") String destinationName,
+                                        @RequestParam(name = "checkInDate") String checkInDate,
+                                        @RequestParam(name = "checkOutDate") String checkOutDate,
+                                        @RequestParam(name = "guestNum") Integer guestNum) throws ParseException {
+          return hotelService.searchParams(hotelName, pricePerDay, cityName, destinationName, checkInDate,
+                          checkOutDate, guestNum);
+  }
+
+  @GetMapping("/top10")
+  public ResponseEntity<?> top10() {
+          return hotelService.top10();
+  }
         
 }

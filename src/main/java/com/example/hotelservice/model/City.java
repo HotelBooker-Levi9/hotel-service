@@ -32,7 +32,6 @@ public class City {
     Set<Hotel> hotels = new HashSet<>();
 
 	public City(String name, String imageUrl, Destination destination, Set<Hotel> hotels) {
-		super();
 		this.name = name;
 		this.imageUrl = imageUrl;
 		this.destination = destination;

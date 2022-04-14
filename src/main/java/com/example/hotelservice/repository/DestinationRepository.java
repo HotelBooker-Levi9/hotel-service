@@ -12,7 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DestinationRepository extends JpaRepository<Destination, Long> {
-	@Query("SELECT c FROM City c WHERE c.destination.id = :destinationId " + "AND c.isDeleted = 0 ")
-	List<City> findAllCitiesForDestination(@Param("destinationId") Long destinationId);
 
 }

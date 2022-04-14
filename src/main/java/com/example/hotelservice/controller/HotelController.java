@@ -56,6 +56,7 @@ public class HotelController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @Secured({"ROLE_CLIENT"})
 	public ResponseEntity<?> getHotelById(@PathVariable Long id) {
 
 		return hotelService.findOne(id);

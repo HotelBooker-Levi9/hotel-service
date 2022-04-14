@@ -1,0 +1,29 @@
+
+version: '3'
+services:
+    mysqldb:
+        image: mysql:8.0.19
+        container_name: hotel-service-mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: lozinka,
+            MYSQL_DATABASE: hotel-service
+        ports:
+            - 3308:3307
+       
+    hotel-service:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://hotel-service:3307/hotel-service
+            SPRING_DATASOURCE_USERNAME: root
+            SPRING_DATASOURCE_PASSWORD: lozinka
+            SPRING_DATASOURCE_DRIVER-CLASS-NAME: com.mysql.cj.jdbc.Driverr
+        image: 
+            hotel-service
+        ports:
+            - "8200:8200"
+        depends_on:
+            - mysqldb

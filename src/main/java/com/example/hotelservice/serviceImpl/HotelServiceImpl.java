@@ -255,4 +255,12 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), Long[].class);
     }
+
+	public ResponseEntity<?> hotelInfo(Long id) {
+		Optional<Hotel> hotel = hotelRepository.findById(id);
+		if(!hotel.isPresent())
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		HotelNameCityDestinationDTO dto = new HotelNameCityDestinationDTO(hotel.get().getName(), hotel.get().getCity().getName(), hotel.get().getCity().getDestination().getName());
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
 }

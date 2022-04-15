@@ -96,5 +96,9 @@ public class HotelController {
         return hotelService.top10();
     }
 
+    @GetMapping("/hotelInfo/{id}")
+    public ResponseEntity<?> hotelInfo(@PathVariable Long id) {
+        return hotelService.hotelInfo(id);
+    }
         
 }

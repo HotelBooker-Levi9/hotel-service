@@ -115,7 +115,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 
 				if (hotel != null) {
 					hotel.setIsDeleted(true);
-					new ResponseEntity<>(HttpStatus.OK);
+					return new ResponseEntity<>(HttpStatus.OK);
 				}
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -231,6 +231,8 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         int i = 0;
         try {
             for (HotelReervationsCount hotelCount : Objects.requireNonNull(getTop10VisitedHotels().getBody())) {
+				if(hotelRepository.findById(hotelCount.getHotelId()).get().getIsDeleted())
+					continue;
                 top10.add(getArrangementForHotel(hotelCount.getHotelId()));
                 if (++i > 9)
                     break;

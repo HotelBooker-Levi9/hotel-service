@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -56,27 +59,28 @@ public class HotelController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @Secured({"ROLE_CLIENT"})
+    //@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> getHotelById(@PathVariable Long id) {
-
+        System.out.println(SecurityContextHolder.getContext().toString());
 		return hotelService.findOne(id);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> getAllHotels() {
 
 		return hotelService.findAll();
 	}
 	
 	 @GetMapping("/capacityForHotel/{id}")
-        public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
+     public ResponseEntity<?> getCapacityForHotelId(@PathVariable Long id) {
                 return hotelService.getCapacityForHotelId(id);
-        }
+    }
 
-        @PostMapping("/priceForReservation")
-        public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
+    @PostMapping("/priceForReservation")
+    public ResponseEntity<?> calculatePriceForReservation(@RequestBody ReservationDTO resDto) {
                 return hotelService.calculatePriceForReservation(resDto);
-        }
+    }
 
         @GetMapping("/all")
         public ResponseEntity<?> getAll() {
@@ -105,5 +109,16 @@ public class HotelController {
         public ResponseEntity<?> top10() {
                 return hotelService.top10();
         }
+
+    @GetMapping("/hello")
+    public String hello(Principal principal) {
+
+        return principal.getName();
+    }
+
+    @GetMapping("/check")
+    public String hello() {
+        return SecurityContextHolder.getContext().getAuthentication().toString();
+    }
         
 }

@@ -54,7 +54,6 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
     private String reservations;
    
 	@Override
-	@Transactional
 	public ResponseEntity<?> add(HotelDTO hotelDTO) {
 		try {
 			Hotel res = HotelAdapter.convertDto(hotelDTO);
@@ -226,6 +225,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         return new ResponseEntity<>(arrangements, HttpStatus.NOT_FOUND);
     }
 
+    
     public ResponseEntity<?> top10() {
         List<Arrangement> top10 = new ArrayList<>();
         int i = 0;
@@ -255,4 +255,12 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), Long[].class);
     }
+
+	public ResponseEntity<?> hotelInfo(Long id) {
+		Optional<Hotel> hotel = hotelRepository.findById(id);
+		if(!hotel.isPresent())
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		HotelNameCityDestinationDTO dto = new HotelNameCityDestinationDTO(hotel.get().getName(), hotel.get().getCity().getName(), hotel.get().getCity().getDestination().getName());
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
 }

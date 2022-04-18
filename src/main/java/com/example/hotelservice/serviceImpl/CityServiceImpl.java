@@ -34,99 +34,85 @@ public class CityServiceImpl implements CRUDService<CityDTO> {
     
     @Value("${reservations}")
     private String reservations;
-    
-    @Transactional
+
 	@Override
 	public ResponseEntity<?> add(CityDTO cityDTO) {
 		try {
 			City res = CityAdapter.convertDto(cityDTO);
-		       
-		       res.setId(cityDTO.getId());
-		       res.setImageUrl(cityDTO.getImageUrl());
-		       res.setName(cityDTO.getName());
-		       res.setIsDeleted(cityDTO.getIsDeleted());
-		       res.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
-		        cityRepository.save(res);
-		        return new ResponseEntity<>(HttpStatus.CREATED);
-				
-			
+			res.setId(cityDTO.getId());
+			res.setImageUrl(cityDTO.getImageUrl());
+			res.setName(cityDTO.getName());
+			res.setIsDeleted(cityDTO.getIsDeleted());
+			res.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
+			cityRepository.save(res);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}catch(Exception ex) {
 			ex.getMessage();
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		
 	}
+
 	@Transactional
 	@Override
 	public ResponseEntity<?> remove(Long id, boolean delete) {
 		try {
-		City city=cityRepository.findById(id).get();
-		List<Hotel> hotelsForCity= hotelRepository.findAllHotelsForCity(id);
-		List<Hotel> noReservation=new ArrayList<>();
-		if(!hotelsForCity.isEmpty()) {
-			for(Hotel hotel:hotelsForCity) {
-				Date dateNow=new Date();
-	        	String pattern = "yyyy-MM-dd";
-	        	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-	            RestTemplate restTemplate = new RestTemplate();
-	            ResponseEntity<Boolean> reserved = restTemplate.getForEntity( reservations + simpleDateFormat.format(dateNow) +"/"+ hotel.getId(), Boolean.class);
-	            if(reserved.getBody().equals(true)) {
-	            		
-	    				noReservation.add(hotel);
-    		
-	            }
-	            else {
-	            	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	            }
-			}
-			if(delete) {
-				if(noReservation.equals(hotelsForCity)) {
-					for(Hotel hotel:noReservation) {
-						
-						hotel.setIsDeleted(true);
-						hotelRepository.save(hotel);
-					
+			City city=cityRepository.findById(id).get();
+			List<Hotel> hotelsForCity= hotelRepository.findAllHotelsForCity(id);
+			List<Hotel> noReservation=new ArrayList<>();
+			if(!hotelsForCity.isEmpty()) {
+				for(Hotel hotel:hotelsForCity) {
+					Date dateNow=new Date();
+					String pattern = "yyyy-MM-dd";
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+					RestTemplate restTemplate = new RestTemplate();
+					ResponseEntity<Boolean> reserved = restTemplate.getForEntity( reservations + simpleDateFormat.format(dateNow) +"/"+ hotel.getId(), Boolean.class);
+					if(reserved.getBody().equals(true)) {
+							noReservation.add(hotel);
 					}
-					city.setIsDeleted(true);
-				}			
+					else {
+						 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+					}
+				}
+				if(delete) {
+					if(noReservation.equals(hotelsForCity)) {
+						for(Hotel hotel:noReservation) {
+							hotel.setIsDeleted(true);
+							hotelRepository.save(hotel);
+						}
+						city.setIsDeleted(true);
+					}
+				}
+				return new ResponseEntity<>(HttpStatus.OK);
 			}
-			return new ResponseEntity<>(HttpStatus.OK);
-
-		}
-		else {
-       	 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-       }
-		}
-		catch(Exception ex) {
+			else {
+			 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch(Exception ex) {
 			ex.getMessage();
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		
 	}
+
 	@Override
 	public ResponseEntity<?> findOne(Long id) {
 		try {
-			CityDTO city=CityAdapter.convertToDTO(cityRepository.findById(id).get());
-			return new ResponseEntity<CityDTO>(city,HttpStatus.OK);
+			return new ResponseEntity<CityDTO>(CityAdapter.convertToDTO(cityRepository.findById(id).get()),HttpStatus.OK);
 		}catch(NoResultException ex) {
 			System.out.println(ex.getMessage());
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		
 	}
+
 	@Override
 	public ResponseEntity<?> findAll(){
 		try {
-			List<CityDTO> cities=CityAdapter.convertListToDTO(cityRepository.findAll());
-			
-			return new ResponseEntity<>(cities,HttpStatus.OK);
+			return new ResponseEntity<>(CityAdapter.convertListToDTO(cityRepository.findAll()),HttpStatus.OK);
 		}catch(NoResultException ex) {
 			System.out.println(ex.getMessage());
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	
-		
 	}
+
 	@Transactional
 	@Override
 	public ResponseEntity<?> update(CityDTO cityDTO) {
@@ -140,19 +126,16 @@ public class CityServiceImpl implements CRUDService<CityDTO> {
 			city.setDestination(destinationRepository.findById(cityDTO.getDestinationDTO().getId()).get());
 			cityRepository.save(city);
 			return new ResponseEntity<>(HttpStatus.OK);
-
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
-	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+
 	@Override
 	public ResponseEntity<?> remove(Long id) {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
-	
-	
    
 }

@@ -23,6 +23,4 @@ public class HotelDTO {
 	private Integer capacity;
 	private Boolean isDeleted;
 	private CityDTO cityDTO;
-
-
 }

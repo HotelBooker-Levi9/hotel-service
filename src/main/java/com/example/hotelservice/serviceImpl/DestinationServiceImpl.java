@@ -4,11 +4,13 @@ import com.example.hotelservice.mapper.DestinationAdapter;
 import com.example.hotelservice.model.City;
 import com.example.hotelservice.model.Destination;
 import com.example.hotelservice.model.dto.DestinationDTO;
+import com.example.hotelservice.repository.CityRepository;
 import com.example.hotelservice.repository.DestinationRepository;
 
 import com.example.hotelservice.service.CRUDService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,12 +23,14 @@ public class DestinationServiceImpl implements CRUDService<DestinationDTO> {
 
     @Autowired
     private DestinationRepository destinationRepository;
+
+	@Autowired
+	private CityRepository cityRepository;
    
     @Autowired 
     private CityServiceImpl cityService;
 
 	@Override
-	@Transactional
 	public ResponseEntity<?> add(DestinationDTO destinationDTO) {
 
 		try {
@@ -95,8 +99,10 @@ public class DestinationServiceImpl implements CRUDService<DestinationDTO> {
 	@Override
 	public ResponseEntity<?> remove(Long id) {
 		try {
-			Destination destination = destinationRepository.findById(id).get();
-			List<City> cities = destinationRepository.findAllCitiesForDestination(id);
+			Optional<Destination> destination = destinationRepository.findById(id);
+			if(!destination.isPresent())
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			List<City> cities = cityRepository.findAllByDestinationId(id);
 			List<City> noReservation = new ArrayList<>();
 
 			if (!cities.isEmpty()) {
@@ -106,13 +112,13 @@ public class DestinationServiceImpl implements CRUDService<DestinationDTO> {
 				if (noReservation.equals(cities)) {
 					for (City city : cities)
 						cityService.remove(city.getId(), true);
-					destination.setIsDeleted(true);
+					destination.get().setIsDeleted(true);
 					return new ResponseEntity<>(HttpStatus.OK);
 				}
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 
-			destination.setIsDeleted(true);
+			destination.get().setIsDeleted(true);
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (Exception ex) {

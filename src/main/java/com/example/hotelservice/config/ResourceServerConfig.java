@@ -15,6 +15,7 @@ public class ResourceServerConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .mvcMatchers("/api/**")
                 .access("hasAuthority('SCOPE_api.read')")

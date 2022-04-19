@@ -49,19 +49,17 @@ public class HotelController {
 		return hotelService.update(hotelDTO);
 	}
 
-	@PutMapping(value = "/deleteHotel/{hotelId}")
+	@PutMapping(value = "/{hotelId}")
 	public ResponseEntity<?> deleteHotel(@PathVariable Long hotelId) {
 		return hotelService.remove(hotelId);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    //@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> getHotelById(@PathVariable Long id) {
 		return hotelService.findOne(id);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> getAllHotels() {
 		return hotelService.findAll();
 	}
@@ -81,7 +79,6 @@ public class HotelController {
         return hotelService.getAll();
     }
 
-    //POST??
     @PostMapping("/search")
     public ResponseEntity<?> search(@RequestBody SearchDTO searchDto) {
         return hotelService.search(searchDto);

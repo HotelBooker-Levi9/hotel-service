@@ -29,7 +29,7 @@ public class CityController {
 		return cityService.add(cityDTO);
 	}
 
-	@PutMapping(value = "/deleteCity/{id}")
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> deleteCity(@PathVariable Long id) {
 		return cityService.remove(id, true);
 	}

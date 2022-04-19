@@ -1,7 +1,4 @@
 package com.example.hotelservice.serviceImpl;
-
-
-
 import com.example.hotelservice.mapper.HotelAdapter;
 import com.example.hotelservice.model.Hotel;
 import com.example.hotelservice.model.dto.HotelDTO;
@@ -17,32 +14,19 @@ import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-
-
 import com.example.hotelservice.dto.*;
 import com.example.hotelservice.mapper.ArrangementAdapter;
-import com.example.hotelservice.model.Hotel;
-import com.example.hotelservice.repository.HotelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class HotelServiceImpl implements CRUDService<HotelDTO> {
-    public static final String GATEWAY_URL = "http://localhost:8765/";
+    public static final String GATEWAY_URL = "http://127.0.0.1:8765/";
 
     @Autowired
     private HotelRepository hotelRepository;
@@ -194,7 +178,7 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
             arrangements = ArrangementAdapter.convertHotelListToArrangementList(hotelRepository.findSearchResults(
                     searchDto.getHotelName(), searchDto.getPricePerDay(), searchDto.getCityName(), searchDto.getDestinationName(), unavailableHotels, searchDto.getGuestNum()));
 
-        return new ResponseEntity<>(arrangements, HttpStatus.FOUND);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public ResponseEntity<?> searchParams(String hotelName, Integer pricePerDay, String cityName, String destinationName, String checkInDate,
@@ -207,7 +191,8 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
             if (!checkInDate.equals("") && !checkOutDate.equals("")) {
                 Date checkIn = formatter.parse(checkInDate);
                 Date checkOut = formatter.parse(checkOutDate);
-                unavailableHotels = Arrays.asList(getUnavailableHotelIdsForDateRange(checkIn, checkOut, guestNum));
+				Long[] list = getUnavailableHotelIdsForDateRange(checkIn, checkOut, guestNum);
+                unavailableHotels = Arrays.asList(list);
             }
 
             if (unavailableHotels.isEmpty()) {
@@ -221,8 +206,8 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
             return new ResponseEntity<>(arrangements, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
+			return new ResponseEntity<>(arrangements, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(arrangements, HttpStatus.NOT_FOUND);
     }
 
     
@@ -253,7 +238,12 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 
     private Long[] getUnavailableHotelIdsForDateRange(Date checkInDate, Date checkOutDate, Integer guestNum) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), Long[].class);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		HttpEntity<DateRangeWithGuestNum> request = new HttpEntity<>(new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), headers);
+		return restTemplate.postForObject(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", request,  Long[].class);
+//        return restTemplate.exchange(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", HttpMethod.POST, new HttpEntity<>(new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum)), Long[].class);
     }
 
 	public ResponseEntity<?> hotelInfo(Long id) {

@@ -33,7 +33,6 @@ import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/hotels")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class HotelController {
 
 	@Autowired

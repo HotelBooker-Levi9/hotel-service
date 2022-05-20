@@ -14,7 +14,8 @@ insert into destination (id, name, image_url) values (9, 'Kit', 'Trundell');
 insert into destination (id, name, image_url) values (10, 'Clayborn', 'Sarjant');
 
 --INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
---        VALUES (1, "slika", "Novi Sad", 1);
+--        VALUES (1, "slika", "Novi Sad", 1);docker images
+
 --INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)
 --        VALUES (2, "slika", "Tivat", 2);
 --INSERT INTO city(`id`,`image_url`,`name`,`destination_id`)

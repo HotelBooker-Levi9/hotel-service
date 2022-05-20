@@ -19,7 +19,7 @@ public class CityController {
 	@Autowired
 	private CityServiceImpl cityService;
 
-	@RequestMapping( value = "/", produces = "application/json", method = {RequestMethod.GET})
+	@GetMapping("/")
 	public ResponseEntity<?> getAllCities() {
 		return cityService.findAll();
 	}

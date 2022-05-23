@@ -42,14 +42,17 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class HotelServiceImpl implements CRUDService<HotelDTO> {
-    public static final String GATEWAY_URL = "http://localhost:8765/";
 
     @Autowired
     private HotelRepository hotelRepository;
 
     @Autowired
     private CityRepository cityRepository;
-    
+
+
+	@Value("${gateway.url}")
+	private String gatewayUrl;
+
     @Value("${reservations}")
     private String reservations;
    
@@ -250,12 +253,12 @@ public class HotelServiceImpl implements CRUDService<HotelDTO> {
 
     private ResponseEntity<HotelReervationsCount[]> getTop10VisitedHotels() {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForEntity(GATEWAY_URL + "reservations/top10hotels", HotelReervationsCount[].class);
+        return restTemplate.getForEntity(gatewayUrl + "reservations/top10hotels", HotelReervationsCount[].class);
     }
 
     private Long[] getUnavailableHotelIdsForDateRange(Date checkInDate, Date checkOutDate, Integer guestNum) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(GATEWAY_URL + "carts/unavailableHotelIdsForDateRange", new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), Long[].class);
+        return restTemplate.postForObject(gatewayUrl + "carts/unavailableHotelIdsForDateRange", new DateRangeWithGuestNum(checkInDate, checkOutDate, guestNum), Long[].class);
     }
 
 	public ResponseEntity<?> hotelInfo(Long id) {

@@ -23,6 +23,7 @@ import com.example.hotelservice.serviceImpl.DestinationServiceImpl;
 
 @RestController
 @RequestMapping(value = "/destinations")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DestinationController {
 
 	@Autowired
